@@ -4,7 +4,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> 
         <!-- JNDI name of the database resource to use -->
         <non-jta-data-source>jdbc/__default</non-jta-data-source>  
-        <!-- <class>com.pmf.entities.User</class> -->
+        <class>com.pmf.codejam.entity.Specials</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>  
             <property name="hibernate.hbm2ddl.auto" value="update"/> 

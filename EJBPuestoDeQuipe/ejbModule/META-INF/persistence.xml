@@ -5,6 +5,8 @@
         <!-- JNDI name of the database resource to use -->
         <non-jta-data-source>jdbc/__default</non-jta-data-source>  
         <class>com.pmf.codejam.entity.Specials</class>
+        <class>com.pmf.codejam.entity.InventoryItem</class>
+        <class>com.pmf.codejam.entity.Ingredient</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>  
             <property name="hibernate.hbm2ddl.auto" value="update"/> 

@@ -17,7 +17,7 @@ public class InventoryItem implements Serializable{
 	private String description;
 	
 	@Column(name="Unit")
-	private String unit; //this field has to be normalized in other table.
+	private String unit; 
 	
 	@Column(name="RestockinLevel")
 	private int restockingLevel;
@@ -25,10 +25,9 @@ public class InventoryItem implements Serializable{
 	@Column(name="RestockingQuantity")
 	private int restockingQuantity;
 	
-
-	@OneToOne 
-	@JoinColumn(name="InventoryId") 	
-    private Ingredient ingredient;
+	//@OneToOne 
+	//@JoinColumn(name="InventoryId") 	
+    //private Ingredient ingredient;
 	
 	public int getId() {
 		return id;

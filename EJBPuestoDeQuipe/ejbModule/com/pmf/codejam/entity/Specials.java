@@ -26,8 +26,10 @@ public class Specials implements Serializable{
 	private String description;		 	 	 	 	 	 	 
 	@Column(name="summary")
 	private String summary;
-	@Column(name="expirationDate")
+	@Column(name="expiration_date")
 	private Date expirationDate;
+	@Column(name="creation_date")
+	private Date creationDate;
 	
 	private List<SocialListener> socialListeners;
 	
@@ -67,6 +69,14 @@ public class Specials implements Serializable{
 		this.expirationDate = expirationDate;
 	}
 	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public List<SocialListener> getSocialListeners() {
 		return socialListeners;
 	}

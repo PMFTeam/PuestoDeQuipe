@@ -34,8 +34,6 @@ public class OrderEntity implements Serializable {
 	
 	private Set<OrderDetail> orderDetails = new HashSet<OrderDetail>();
 	
-	
-	
 	public int getNumber() {
 		return number;
 	}
@@ -81,7 +79,7 @@ public class OrderEntity implements Serializable {
 	}
 	
 	public boolean addOrderDetail(OrderDetail orderDetail) {
-			return orderDetails.add(orderDetail);
+		return orderDetails.add(orderDetail);
 	}
 	
 	public boolean removeOrderDetail(OrderDetail orderDetail){
@@ -90,20 +88,27 @@ public class OrderEntity implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return String.valueOf(this.number).hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + number;
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if((obj == null)
-				|| (!(obj instanceof OrderEntity)) ) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		
-		OrderEntity orderEntityParameter = (OrderEntity)obj;
-		
-		return this.hashCode() == orderEntityParameter.hashCode();
+		if (getClass() != obj.getClass())
+			return false;
+		OrderEntity other = (OrderEntity) obj;
+		if (number != other.number)
+			return false;
+		return true;
 	}
+	
+	
 	
 	
 }

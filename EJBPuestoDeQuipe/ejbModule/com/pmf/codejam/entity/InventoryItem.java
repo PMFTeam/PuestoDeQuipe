@@ -89,12 +89,12 @@ public class InventoryItem implements Serializable{
 	/**
 	 * Its is responsible for decreasing the amount of ingredient inventory.
 	 */
-	public void decreaseQuatity(InventoryItem item, int quantity ){
+	public void decreaseQuantity(InventoryItem item, int quantity ){
 		if(item.getQuantity() <= item.getRestockingQuantity()){
-			int supplier = item.getSupplierId();
+			int supplierProductId = item.getId();
 			String uni 		= item.getUnit();
 			int quan 	= item.getRestockingQuantity();			
-			restockingItemQuantity(supplier,uni,quan);
+			restockingItemQuantity(supplierProductId,uni,quan);
 			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.
 		}
 		else{
@@ -107,14 +107,14 @@ public class InventoryItem implements Serializable{
 	 * @param uni
 	 * @param quantity
 	 */
-	public void restockingItemQuantity(int supplierId, String uni, int quantity)
+	public void restockingItemQuantity(int supplierProductId, String uni, int quantity)
 	{
+		//Remove this comment when we implement the web service.
 		/*
 		InventoryRequest inventoryR = new InventoryRequest();
-		RequestItem itemR = new RequestItem();
-		itemR.setQuantity(quantity);
+		RequestItem itemy);
 		itemR.setUnit = unit;
-		itemR.setSupplier(suppliarId);
+		itemR.SetSupplierProductId(supplierProductId);
 		inventoryR.addItem(itemR);
 		*/	
 	}

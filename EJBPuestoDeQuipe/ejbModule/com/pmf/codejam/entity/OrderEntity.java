@@ -99,4 +99,27 @@ public class OrderEntity implements Serializable {
 		
 		return false;
 	}
+
+	@Override
+	public int hashCode() {
+		
+		return String.valueOf(this.number).hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		
+		if(!(obj instanceof OrderEntity)) {
+			return false;
+		}
+		
+		OrderEntity orderEntityParameter = (OrderEntity)obj;
+		
+		return this.hashCode() == orderEntityParameter.hashCode();
+	}
+	
+	
 }

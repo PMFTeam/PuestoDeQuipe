@@ -81,23 +81,11 @@ public class OrderEntity implements Serializable {
 	}
 	
 	public boolean addOrderDetail(OrderDetail orderDetail) {
-		
-		if(!orderDetails.contains(orderDetail)) {
 			return orderDetails.add(orderDetail);
-		}
-		
-		return false;
 	}
 	
 	public boolean removeOrderDetail(OrderDetail orderDetail){
-
-		for(OrderDetail od: orderDetails) {
-			if(od.equals(orderDetail)) {
-				return orderDetails.remove(od);
-			}
-		}
-		
-		return false;
+		return orderDetails.remove(orderDetail);
 	}
 
 	@Override

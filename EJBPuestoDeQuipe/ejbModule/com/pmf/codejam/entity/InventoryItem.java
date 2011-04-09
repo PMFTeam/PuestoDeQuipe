@@ -80,10 +80,10 @@ public class InventoryItem implements Serializable{
 	public String getDescription() {
 		return description;
 	}	
-	public void setSupplierId(int supp){
+	public void setSupplierProductId(int supp){
 		this.supplierProductId = supp;
 	}	
-	public int getSupplierId(){
+	public int getSupplierProductId(){
 		return supplierProductId;
 	}
 	public void setQuantity(int quantity)	{
@@ -147,7 +147,7 @@ public class InventoryItem implements Serializable{
 	 */
 	public void decreaseQuantity(int quantityToDecrease){
 		if((this.quantity <= this.restockingLevel) || (this.quantity < quantityToDecrease)){				
-			restockingItemQuantity(this.getId(),this.getUnit(),this.getRestockingQuantity());
+			restockingItemQuantity(this.getSupplierProductId(),this.getUnit(),this.getRestockingQuantity());
 			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.I only know that the amount is increased.
 			this.quantity+= quantityToDecrease;
 		}

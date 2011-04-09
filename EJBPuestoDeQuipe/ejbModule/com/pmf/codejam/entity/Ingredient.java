@@ -23,11 +23,11 @@ public class Ingredient implements Serializable{
 	protected IngredientPK ingredientPK;
 	
 	@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)    
 	private Product product;
 	
 	@JoinColumn(name = "INVENTORY_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)    
 	private InventoryItem inventoryItem;
 		   
     @Basic(optional = false)

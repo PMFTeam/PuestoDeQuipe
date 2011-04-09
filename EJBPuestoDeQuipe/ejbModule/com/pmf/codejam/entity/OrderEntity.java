@@ -102,17 +102,13 @@ public class OrderEntity implements Serializable {
 
 	@Override
 	public int hashCode() {
-		
 		return String.valueOf(this.number).hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null) {
-			return false;
-		}
-		
-		if(!(obj instanceof OrderEntity)) {
+		if((obj == null)
+				|| (!(obj instanceof OrderEntity)) ) {
 			return false;
 		}
 		

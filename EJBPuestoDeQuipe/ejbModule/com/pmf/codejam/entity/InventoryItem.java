@@ -92,8 +92,8 @@ public class InventoryItem implements Serializable{
 	public void decreaseQuantity(InventoryItem item, int quantity ){
 		if(item.getQuantity() <= item.getRestockingQuantity()){
 			int supplierProductId = item.getId();
-			String uni 		= item.getUnit();
-			int quan 	= item.getRestockingQuantity();			
+			String uni = item.getUnit();
+			int quan   = item.getRestockingQuantity();			
 			restockingItemQuantity(supplierProductId,uni,quan);
 			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.
 		}
@@ -112,10 +112,12 @@ public class InventoryItem implements Serializable{
 		//Remove this comment when we implement the web service.
 		/*
 		InventoryRequest inventoryR = new InventoryRequest();
-		RequestItem itemy);
+		RequestItem itemR = new RequestItem();
+		itemR.setQuantity(quantity);
 		itemR.setUnit = unit;
-		itemR.SetSupplierProductId(supplierProductId);
+		itemR.setSupplierProductId(supplierProductId);
 		inventoryR.addItem(itemR);
+		sendRequest(inventoryR);
 		*/	
 	}
 	

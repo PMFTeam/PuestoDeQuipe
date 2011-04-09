@@ -1,3 +1,4 @@
+
 package com.pmf.codejam.entity;
 import java.io.Serializable;
 
@@ -6,11 +7,26 @@ import com.pmf.codejam.util.EjbConstants;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+*
+* @author fpimentel
+*/
+@Entity
+@Table(name = EjbConstants.TABLE_PRODUCTS)
+@NamedQueries({
+    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 		
-	@Column(name="id")
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID", nullable = false)
+	private Integer id;
 	
 	@Column(name="name")
 	private String name;
@@ -20,16 +36,29 @@ public class Product implements Serializable{
 	
 	@Column(name="Price")
 	private float price;
-	
-	@ElementCollection
-	@CollectionTable(name=EjbConstants.TABLE_PRODUCTS,joinColumns=@JoinColumn(name="ProductId"))
+    
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = EjbConstants.TABLE_PRODUCTS, fetch = FetchType.LAZY)
 	private Set<Ingredient> ingredients;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
+    private Set<OrderItem> orderItems;
+	
+    public Product(){
+    	
+    }
+    public Product(Integer id) {
+        this.id = id;
+    }
+
+    public Product(Integer id, float price) {
+        this.id = id;
+        this.price = price;
+    }
 	//setter's and getter's
-	public int getId(){
+	public Integer getId(){
 		return id;
 	}
-	public void setId(int id){
+	public void setId(Integer id){
 		this.id=id;
 	}
 	public String getName(){
@@ -56,8 +85,36 @@ public class Product implements Serializable{
 	public void setIngredients(Set<Ingredient> ingredients){
 		this.ingredients = ingredients;
 	}
-	
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 	//Customs methods.....
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Product)) {
+            return false;
+        }
+        Product other = (Product) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public String toString() {
+        return "Product[id=" + id + " Name=" + name +"]";
+    }   
 	public void addIngredient(Ingredient ingredient){
 		ingredients.add(ingredient);
 	}	

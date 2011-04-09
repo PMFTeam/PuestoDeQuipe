@@ -93,12 +93,14 @@ public class Product implements Serializable{
         this.orderItems = orderItems;
     }
 	//Customs methods.....
+    
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -111,44 +113,47 @@ public class Product implements Serializable{
         }
         return true;
     }
+    
     @Override
     public String toString() {
         return "Product[id=" + id + " Name=" + name +"]";
     }   
-	public void addIngredient(Ingredient ingredient){
+	
+    public void addIngredient(Ingredient ingredient){
 		ingredients.add(ingredient);
-	}	
-	public void restock(int amountProductToRequest) throws ProductException{			
-			Set<Ingredient> i = new HashSet<Ingredient>();
-			 for (Iterator<Ingredient> ing = i.iterator(); ing.hasNext(); ){
-				 Ingredient currentIngre = ing.next();
-				 
-				 int ingredientId =currentIngre.getInventoryItem().getId();
-				 int amountIngredientNeeded = currentIngre.getQuantity();
-			     String unit = currentIngre.getInventoryItem().getUnit();  
-			     int amountIngredientToRequest = amountProductToRequest *  amountIngredientNeeded;
-			     
-			     currentIngre.getInventoryItem().restockingItemQuantity(ingredientId, unit, amountIngredientToRequest);							
-			 }		
+	}
+	
+	//Behaviors
+	public void restock(int productQuantity) throws ProductException {
+		//Fausto, simplifiqué un poco tu código. Fred
+		try {
+		 for (Ingredient ing: this.getIngredients())			 
+		     ing.getInventoryItem().
+		     	restockQuantity(Math.ceil(productQuantity * ing.getQuantityNeeded()));
+		}
+		catch( Exception e) {
+			throw new ProductException(e);
+		}
 	}
 	/***
-	 * Its Calculate the amount of products that can be done according to what exists in Stock.
+	 * Its Calculate the amount of products that can be made according to what exists in Stock.
 	 * @return
 	 */
-	public int avariableQuantity() throws ProductException{
-		int avariableQuantity = 0;
-		
-		Set<Ingredient> i = new HashSet<Ingredient>();
-		 for (Iterator<Ingredient> ing = i.iterator(); ing.hasNext(); ){
-			 int quantityTemp;
-			 Ingredient currentIngre = ing.next();
-			 quantityTemp = currentIngre.getInventoryItem().getQuantity() / currentIngre.getQuantity();
-			 
-			 if(avariableQuantity > quantityTemp)
-				 avariableQuantity = quantityTemp;
+	public int availableQuantity() throws ProductException {
+		//Aquí hice lo mismo. Fred
+		double result = 0.0;
+		try {
+		 for (Ingredient ing: this.ingredients) {
+			 double prodQty = Math.floor(ing.getInventoryItem().getQuantity() / ing.getQuantityNeeded());
+			 result = result <= 0 ? prodQty : Math.floor(Math.min(result, prodQty));
 		 }
-		return avariableQuantity;		 
+		}
+		catch(Exception e) {
+			throw new ProductException(e);  
+		}
+		return (int)result;
 	}
+		
 	public void removeIngredient(Ingredient ingredient){
 		this.ingredients.remove(ingredient);
 	}

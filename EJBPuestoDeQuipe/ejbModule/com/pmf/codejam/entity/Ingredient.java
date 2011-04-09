@@ -32,7 +32,7 @@ public class Ingredient implements Serializable{
 		   
     @Basic(optional = false)
     @Column(name = "QUANTITY", nullable = false)	
-	private int quantity;
+	private double quantityNeeded;
 	
     public Ingredient() {
     }
@@ -41,9 +41,9 @@ public class Ingredient implements Serializable{
         this.ingredientPK = ingredientPK;
     }
 
-    public Ingredient(IngredientPK ingredientPK, short quantity) {
+    public Ingredient(IngredientPK ingredientPK, double quantity) {
         this.ingredientPK = ingredientPK;
-        this.quantity = quantity;
+        this.quantityNeeded = quantity;
     }
 
     public Ingredient(int productId, int inventoryId) {
@@ -62,11 +62,11 @@ public class Ingredient implements Serializable{
 	public void setInventoryItem(InventoryItem inventoryItem) {
 		this.inventoryItem = inventoryItem;
 	}	
-	public int getQuantity() {
-		return quantity;
+	public double getQuantityNeeded() {
+		return quantityNeeded;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantityNedded(double quantity) {
+		this.quantityNeeded = quantity;
 	}
 	
     @Override

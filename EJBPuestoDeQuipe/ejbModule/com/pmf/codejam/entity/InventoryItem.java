@@ -15,6 +15,7 @@ import javax.persistence.*;
     @NamedQuery(name = "InventoryItem.findAll", query = "SELECT i FROM InventoryItem i"),
     @NamedQuery(name = "InventoryItem.findById", query = "SELECT i FROM InventoryItem i WHERE i.id = :id"),
     @NamedQuery(name = "InventoryItem.findByDescription", query = "SELECT i FROM InventoryItem i WHERE i.description = :description"),
+    @NamedQuery(name = "InventoryItem.findByQuantity", query = "SELECT i FROM InventoryItem i WHERE i.description = :quantity"),
     @NamedQuery(name = "InventoryItem.findByUnit", query = "SELECT i FROM InventoryItem i WHERE i.unit = :unit"),
     @NamedQuery(name = "InventoryItem.findByRestockingLevel", query = "SELECT i FROM InventoryItem i WHERE i.restockingLevel = :restockingLevel"),
     @NamedQuery(name = "InventoryItem.findByRestockingQuantity", query = "SELECT i FROM InventoryItem i WHERE i.restockingQuantity = :restockingQuantity")})
@@ -26,95 +27,102 @@ public class InventoryItem implements Serializable{
     @Column(name = "ID", nullable = false)
 	private Integer id;
 	
-	@Column(name="SupplierProductId")
-	private int supplierProductId;
+	@Column(name="SUPPLIER_PRODUCT_ID")
+	private String supplierProductId;
 	
-	@Column(name="Description")
+	@Column(name="DESCRIPTION")
 	private String description;
-	
+
 	@Basic(optional = false)
-	@Column(name="Unit")
+	@Column(name="QUANTITY")
+	private double quantity;
+
+	@Basic(optional = false)
+	@Column(name="UNIT")
 	private String unit; 
 	
-	@Basic(optional = false)
-	@Column(name="Quantity")
-	private int quantity;
 
 	@Basic(optional = false)
     @Column(name = "RESTOCKING_LEVEL", nullable = false)
-	private short  restockingLevel;
+	private double  restockingLevel;
 
     @Basic(optional = false)
     @Column(name = "RESTOCKING_QUANTITY", nullable = false)
-	private short  restockingQuantity;	
+	private double  restockingQuantity;	
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventoryItem", fetch = FetchType.LAZY)
 	@OneToOne          
-	private Set<Ingredient> ingredientSet;
+	private Set<Ingredient> ingredients;
 	
     public InventoryItem() {
     }
 
-    public InventoryItem(Integer id) {
+    public InventoryItem(int id) {
         this.id = id;
     }
 
-    public InventoryItem(Integer id, String description, String unit, short restockingLevel, short restockingQuantity) {
+    public InventoryItem(int id, String description, double quantity, String unit, double restockingLevel, double restockingQuantity) {
         this.id = id;
         this.description = description;
+        this.quantity = quantity;
         this.unit = unit;
         this.restockingLevel = restockingLevel;
         this.restockingQuantity = restockingQuantity;
     }
     
-	//gette's and setter's
+	//getter's and setter's
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}		
+	
 	public void setDescription(String desc) {
 		this.description = desc;
 	}
+	
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+	
+	public double getQuantity() {
+		return this.quantity;
+	}
+	
 	public String getDescription() {
 		return description;
 	}	
-	public void setSupplierProductId(int supp){
+	public void setSupplierProductId(String supp){
 		this.supplierProductId = supp;
 	}	
-	public int getSupplierProductId(){
+	public String getSupplierProductId(){
 		return supplierProductId;
 	}
-	public void setQuantity(int quantity)	{
-		this.quantity = quantity;
-	}
-	public int getQuantity(){
-		return this.quantity;
-	}
+	
 	public String getUnit() {
 		return unit;
 	}
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}	
-	public int getRestockingLevel() {
+	public double getRestockingLevel() {
 		return restockingLevel;
 	}
-	public void setRestockingLevel(short restockingLevel) {
+	public void setRestockingLevel(double restockingLevel) {
 		this.restockingLevel = restockingLevel;
 	}	
-	public int getRestockingQuantity() {
+	public double getRestockingQuantity() {
 		return restockingQuantity;
 	}	
-	public void setRestockingQuantity(short restockingQuantity) {
+	public void setRestockingQuantity(double restockingQuantity) {
 		this.restockingQuantity = restockingQuantity;
 	}		
-    public Set<Ingredient> getIngredientSet() {
-        return ingredientSet;
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
     }
-    public void setIngredientSet(Set<Ingredient> ingredientSet) {
-        this.ingredientSet = ingredientSet;
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 	//Customs methods
     @Override
@@ -145,9 +153,9 @@ public class InventoryItem implements Serializable{
 	/**
 	 * Its is responsible for decreasing the amount of ingredient inventory.
 	 */
-	public void decreaseQuantity(int quantityToDecrease){
+	public void decreaseQuantity(double quantityToDecrease){
 		if((this.quantity <= this.restockingLevel) || (this.quantity < quantityToDecrease)){				
-			restockingItemQuantity(this.getSupplierProductId(),this.getUnit(),this.getRestockingQuantity());
+			restockQuantity(this.getRestockingQuantity());
 			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.I only know that the amount is increased.
 			this.quantity+= quantityToDecrease;
 		}
@@ -161,7 +169,7 @@ public class InventoryItem implements Serializable{
 	 * @param uni
 	 * @param quantity
 	 */
-	public void restockingItemQuantity(int supplierProductId, String uni, int quantity)
+	public void restockQuantity(double quantityToRestock)
 	{
 		//Remove this comment when we implement the web service.
 		/*

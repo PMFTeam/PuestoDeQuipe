@@ -8,6 +8,7 @@ import java.io.Serializable;
 //@Table(name = EjbConstants.TABLE_INGREDIENTS)
 @Embeddable
 public class Ingredient implements Serializable{
+	//Merge Test. Frederick Apr 2009, 2011
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

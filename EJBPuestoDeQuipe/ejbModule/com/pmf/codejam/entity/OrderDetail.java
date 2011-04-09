@@ -45,11 +45,8 @@ public class OrderDetail {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null) {
-			return false;
-		}
-		
-		if(!(obj instanceof OrderDetail)) {
+		if((obj == null)
+				|| (!(obj instanceof OrderDetail)) ) {
 			return false;
 		}
 		
@@ -60,8 +57,10 @@ public class OrderDetail {
 
 	@Override
 	public int hashCode() {
-		return (int) Math.pow(this.orderNumber,this.productId);
+		return  ((this.orderNumber)+"%"+(this.productId)).hashCode();
 	}
+	
+	
 	
 	
 }

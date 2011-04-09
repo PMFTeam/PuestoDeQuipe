@@ -45,19 +45,27 @@ public class OrderDetail {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if((obj == null)
-				|| (!(obj instanceof OrderDetail)) ) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-		}
-		
-		OrderDetail orderDetailParameter = (OrderDetail)obj;
-		
-		return this.hashCode() == orderDetailParameter.hashCode();
+		if (getClass() != obj.getClass())
+			return false;
+		OrderDetail other = (OrderDetail) obj;
+		if (orderNumber != other.orderNumber)
+			return false;
+		if (productId != other.productId)
+			return false;
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return  ((this.orderNumber)+"%"+(this.productId)).hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + orderNumber;
+		result = prime * result + productId;
+		return result;
 	}
 	
 	

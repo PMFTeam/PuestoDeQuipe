@@ -4,23 +4,51 @@ import javax.persistence.*;
 import com.pmf.codejam.util.EjbConstants;
 import java.io.Serializable;
 
-//@Entity
-//@Table(name = EjbConstants.TABLE_INGREDIENTS)
-@Embeddable
+/**
+*
+* @author fpimentel
+*/
+@Entity
+@Table(name = EjbConstants.TABLE_INGREDIENTS)
+@NamedQueries({
+   @NamedQuery(name = "Ingredient.findAll", query = "SELECT i FROM Ingredient i"),
+   @NamedQuery(name = "Ingredient.findByProductId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.productId = :productId"),
+   @NamedQuery(name = "Ingredient.findByInventoryId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.inventoryId = :inventoryId"),
+   @NamedQuery(name = "Ingredient.findByQuantity", query = "SELECT i FROM Ingredient i WHERE i.quantity = :quantity")})
 public class Ingredient implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ProductId")
+	@EmbeddedId
+	protected IngredientPK ingredientPK;
+	
+	@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)    
 	private Product product;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="InventoryId")
+	@JoinColumn(name = "INVENTORY_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)    
 	private InventoryItem inventoryItem;
-	
-	@Column(name="Quantity")
+		   
+    @Basic(optional = false)
+    @Column(name = "QUANTITY", nullable = false)	
 	private int quantity;
 	
+    public Ingredient() {
+    }
+
+    public Ingredient(IngredientPK ingredientPK) {
+        this.ingredientPK = ingredientPK;
+    }
+
+    public Ingredient(IngredientPK ingredientPK, short quantity) {
+        this.ingredientPK = ingredientPK;
+        this.quantity = quantity;
+    }
+
+    public Ingredient(int productId, int inventoryId) {
+        this.ingredientPK = new IngredientPK(productId, inventoryId);
+    }
+    
 	public Product getProduct() {
 		return product;
 	}
@@ -39,4 +67,29 @@ public class Ingredient implements Serializable{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (ingredientPK != null ? ingredientPK.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Ingredient)) {
+            return false;
+        }
+        Ingredient other = (Ingredient) object;
+        if ((this.ingredientPK == null && other.ingredientPK != null) || (this.ingredientPK != null && !this.ingredientPK.equals(other.ingredientPK))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.pmf.codejam.entity.Ingredient[ingredientPK=" + ingredientPK + "]";
+    }
 }

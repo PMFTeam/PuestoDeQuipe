@@ -89,16 +89,14 @@ public class InventoryItem implements Serializable{
 	/**
 	 * Its is responsible for decreasing the amount of ingredient inventory.
 	 */
-	public void decreaseQuantity(InventoryItem item, int quantity ){
-		if(item.getQuantity() <= item.getRestockingQuantity()){
-			int supplierProductId = item.getId();
-			String uni = item.getUnit();
-			int quan   = item.getRestockingQuantity();			
-			restockingItemQuantity(supplierProductId,uni,quan);
-			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.
+	public void decreaseQuantity(int quantityToDecrease){
+		if((this.quantity <= this.restockingLevel) || (this.quantity < quantityToDecrease)){				
+			restockingItemQuantity(this.getId(),this.getUnit(),this.getRestockingQuantity());
+			//WHAT WE GONNA DO BEFORE THE SERVICE CALL???.I only know that the amount is increased.
+			this.quantity+= quantityToDecrease;
 		}
 		else{
-			item.setQuantity(item.getQuantity() - quantity); 
+			this.quantity-=  quantityToDecrease; 
 		}
 	}	
 	/**

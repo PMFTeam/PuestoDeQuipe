@@ -1,0 +1,135 @@
+package com.pmf.codejam.entity;
+
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.management.Notification;
+import javax.management.NotificationBroadcaster;
+import javax.management.NotificationBroadcasterSupport;
+import javax.management.NotificationListener;
+import javax.persistence.*;
+
+import com.pmf.codejam.exception.SocialConnectionException;
+import com.pmf.codejam.social.NotificationUserData;
+import com.pmf.codejam.util.EjbConstants;
+
+/**
+ *
+ * @author Frederick
+ */
+@Entity
+@Table(name = "SPECIALS")
+@NamedQueries({
+    @NamedQuery(name = "Special.findAll", query = "SELECT s FROM Special s"),
+    @NamedQuery(name = "Special.findById", query = "SELECT s FROM Special s WHERE s.id = :id"),
+    @NamedQuery(name = "Special.findByDescription", query = "SELECT s FROM Special s WHERE s.description = :description"),
+    @NamedQuery(name = "Special.findBySummary", query = "SELECT s FROM Special s WHERE s.summary = :summary"),
+    @NamedQuery(name = "Special.findByCreationDate", query = "SELECT s FROM Special s WHERE s.creationDate = :creationDate"),
+    @NamedQuery(name = "Special.findByExpirationDate", query = "SELECT s FROM Special s WHERE s.expirationDate = :expirationDate")})
+public class Special implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID", nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "DESCRIPTION", nullable = false, length = 500)
+    private String description;
+    @Column(name = "SUMMARY", length = 140)
+    private String summary;
+    @Basic(optional = false)
+    @Column(name = "CREATION_DATE", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+    @Column(name = "EXPIRATION_DATE")
+    @Temporal(TemporalType.DATE)
+    private Date expirationDate;
+
+    public Special() {
+    }
+
+    public Special(Integer id) {
+        this.id = id;
+    }
+
+    public Special(Integer id, String description, Date creationDate) {
+        this.id = id;
+        this.description = description;
+        this.creationDate = creationDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Special)) {
+            return false;
+        }
+        Special other = (Special) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.pmf.codejam.entity.Special[id=" + id + "]";
+    }
+    
+    public boolean isCurrent() {
+    	Calendar thisExpirationDate = Calendar.getInstance();
+    	thisExpirationDate.setTime(getExpirationDate());
+    	return Calendar.getInstance().before(thisExpirationDate);
+    }
+
+}

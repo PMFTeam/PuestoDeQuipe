@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,56 +19,58 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.pmf.codejam.util.EjbConstants;
+
 /**
  *
- * @author Frederick
+ * @author Melvin Severino
  */
 @Entity
-@Table(name = "ORDERS")
+@Table(name = EjbConstants.TABLE_ORDERS, catalog = "", schema = "APP")
 @NamedQueries({
-    @NamedQuery(name = "OrderEntity.findAll", query = "SELECT o FROM OrderEntity o"),
-    @NamedQuery(name = "OrderEntity.findByOrderNo", query = "SELECT o FROM OrderEntity o WHERE o.orderNo = :orderNo"),
-    @NamedQuery(name = "OrderEntity.findByEmail", query = "SELECT o FROM OrderEntity o WHERE o.email = :email"),
-    @NamedQuery(name = "OrderEntity.findByCustomerName", query = "SELECT o FROM OrderEntity o WHERE o.customerName = :customerName"),
-    @NamedQuery(name = "OrderEntity.findByAddress", query = "SELECT o FROM OrderEntity o WHERE o.address = :address"),
-    @NamedQuery(name = "OrderEntity.findByPhone", query = "SELECT o FROM OrderEntity o WHERE o.phone = :phone")})
-public class OrderEntity implements Serializable {
+    @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
+    @NamedQuery(name = "Order.findByOrderNo", query = "SELECT o FROM Order o WHERE o.orderNo = :orderNo"),
+    @NamedQuery(name = "Order.findByEmail", query = "SELECT o FROM Order o WHERE o.email = :email"),
+    @NamedQuery(name = "Order.findByCustomerName", query = "SELECT o FROM Order o WHERE o.customerName = :customerName"),
+    @NamedQuery(name = "Order.findByAddress", query = "SELECT o FROM Order o WHERE o.address = :address"),
+    @NamedQuery(name = "Order.findByPhone", query = "SELECT o FROM Order o WHERE o.phone = :phone")})
+
+public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ORDER_NO", nullable = false)
-    private Integer orderNo;
-    @Column(name = "EMAIL", length = 50)
+    @Column(name = "ORDER_NO")
+    private Long orderNo;
+    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "CUSTOMER_NAME", length = 100)
+    @Column(name = "CUSTOMER_NAME")
     private String customerName;
     @Basic(optional = false)
-    @Column(name = "ADDRESS", nullable = false, length = 200)
+    @Column(name = "ADDRESS")
     private String address;
-    @Column(name = "PHONE", length = 20)
+    @Column(name = "PHONE")
     private String phone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity", fetch = FetchType.LAZY)
-    private Set<OrderDetail> orderItems;
-   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    private Set<OrderDetail> orderDetailSet;
 
-    public OrderEntity() {
+    public Order() {
     }
 
-    public OrderEntity(Integer orderNo) {
+    public Order(Long orderNo) {
         this.orderNo = orderNo;
     }
 
-    public OrderEntity(Integer orderNo, String address) {
+    public Order(Long orderNo, String address) {
         this.orderNo = orderNo;
         this.address = address;
     }
 
-    public Integer getOrderNo() {
+    public Long getOrderNo() {
         return orderNo;
     }
 
-    public void setOrderNo(Integer orderNo) {
+    public void setOrderNo(Long orderNo) {
         this.orderNo = orderNo;
     }
 
@@ -105,12 +106,12 @@ public class OrderEntity implements Serializable {
         this.phone = phone;
     }
 
-    public Set<OrderDetail> getOrderItems() {
-        return orderItems;
+    public Set<OrderDetail> getOrderDetailSet() {
+        return orderDetailSet;
     }
 
-    public void setOrderItems(Set<OrderDetail> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderDetailSet(Set<OrderDetail> orderDetailSet) {
+        this.orderDetailSet = orderDetailSet;
     }
 
     @Override
@@ -123,10 +124,10 @@ public class OrderEntity implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrderEntity)) {
+        if (!(object instanceof Order)) {
             return false;
         }
-        OrderEntity other = (OrderEntity) object;
+        Order other = (Order) object;
         if ((this.orderNo == null && other.orderNo != null) || (this.orderNo != null && !this.orderNo.equals(other.orderNo))) {
             return false;
         }
@@ -135,7 +136,7 @@ public class OrderEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.pmf.codejam.entity.OrderEntity[orderNo=" + orderNo + "]";
+        return "com.pmf.codejam.entity.Order[orderNo=" + orderNo + "]";
     }
 
 }

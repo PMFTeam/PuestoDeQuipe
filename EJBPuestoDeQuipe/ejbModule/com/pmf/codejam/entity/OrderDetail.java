@@ -10,60 +10,74 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.pmf.codejam.util.EjbConstants;
+
 /**
  *
- * @author Frederick
+ * @author Melvin Severino
  */
 @Entity
-@Table(name = "ORDER_DETAILS")
+@Table(name = EjbConstants.TABLE_ORDER_DETAILS, catalog = "", schema = "APP")
 @NamedQueries({
-    @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
-    @NamedQuery(name = "OrderItem.findByOrderNo", query = "SELECT o FROM OrderItem o WHERE o.orderItemPK.orderNo = :orderNo"),
-    @NamedQuery(name = "OrderItem.findByDetailSeq", query = "SELECT o FROM OrderItem o WHERE o.orderItemPK.detailSeq = :detailSeq"),
-    @NamedQuery(name = "OrderItem.findByQuantity", query = "SELECT o FROM OrderItem o WHERE o.quantity = :quantity")})
+    @NamedQuery(name = "OrderDetail.findAll", query = "SELECT o FROM OrderDetail o"),
+    @NamedQuery(name = "OrderDetail.findByOrderNo", query = "SELECT o FROM OrderDetail o WHERE o.orderDetailPK.orderNo = :orderNo"),
+    @NamedQuery(name = "OrderDetail.findByProductId", query = "SELECT o FROM OrderDetail o WHERE o.orderDetailPK.productId = :productId"),
+    @NamedQuery(name = "OrderDetail.findByDetailSeq", query = "SELECT o FROM OrderDetail o WHERE o.detailSeq = :detailSeq"),
+    @NamedQuery(name = "OrderDetail.findByQuantity", query = "SELECT o FROM OrderDetail o WHERE o.quantity = :quantity")})
 public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected OrderItemPK orderItemPK;
+    protected OrderDetailPK orderDetailPK;
     @Basic(optional = false)
-    @Column(name = "QUANTITY", nullable = false)
+    @Column(name = "DETAIL_SEQ")
+    private short detailSeq;
+    @Basic(optional = false)
+    @Column(name = "QUANTITY")
     private short quantity;
-    @JoinColumn(name = "ORDER_NO", referencedColumnName = "ORDER_NO", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OrderEntity orderEntity;
-    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Product productId;
+    @JoinColumn(name = "ORDER_NO", referencedColumnName = "ORDER_NO", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Order order;
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Product product;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(OrderItemPK orderItemPK) {
-        this.orderItemPK = orderItemPK;
+    public OrderDetail(OrderDetailPK orderDetailPK) {
+        this.orderDetailPK = orderDetailPK;
     }
 
-    public OrderDetail(OrderItemPK orderItemPK, short quantity) {
-        this.orderItemPK = orderItemPK;
+    public OrderDetail(OrderDetailPK orderDetailPK, short detailSeq, short quantity) {
+        this.orderDetailPK = orderDetailPK;
+        this.detailSeq = detailSeq;
         this.quantity = quantity;
     }
 
-    public OrderDetail(int orderNo, short detailSeq) {
-        this.orderItemPK = new OrderItemPK(orderNo, detailSeq);
+    public OrderDetail(long orderNo, int productId) {
+        this.orderDetailPK = new OrderDetailPK(orderNo, productId);
     }
 
-    public OrderItemPK getOrderItemPK() {
-        return orderItemPK;
+    public OrderDetailPK getOrderDetailPK() {
+        return orderDetailPK;
     }
 
-    public void setOrderItemPK(OrderItemPK orderItemPK) {
-        this.orderItemPK = orderItemPK;
+    public void setOrderDetailPK(OrderDetailPK orderDetailPK) {
+        this.orderDetailPK = orderDetailPK;
+    }
+
+    public short getDetailSeq() {
+        return detailSeq;
+    }
+
+    public void setDetailSeq(short detailSeq) {
+        this.detailSeq = detailSeq;
     }
 
     public short getQuantity() {
@@ -74,26 +88,26 @@ public class OrderDetail implements Serializable {
         this.quantity = quantity;
     }
 
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (orderItemPK != null ? orderItemPK.hashCode() : 0);
+        int hash = 31;
+        hash += (orderDetailPK != null ? orderDetailPK.hashCode() : 31);
         return hash;
     }
 
@@ -104,7 +118,7 @@ public class OrderDetail implements Serializable {
             return false;
         }
         OrderDetail other = (OrderDetail) object;
-        if ((this.orderItemPK == null && other.orderItemPK != null) || (this.orderItemPK != null && !this.orderItemPK.equals(other.orderItemPK))) {
+        if ((this.orderDetailPK == null && other.orderDetailPK != null) || (this.orderDetailPK != null && !this.orderDetailPK.equals(other.orderDetailPK))) {
             return false;
         }
         return true;
@@ -112,7 +126,7 @@ public class OrderDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "com.pmf.codejam.entity.OrderItem[orderItemPK=" + orderItemPK + "]";
+        return "com.pmf.codejam.entity.OrderDetail[orderDetailPK=" + orderDetailPK + "]";
     }
 
 }

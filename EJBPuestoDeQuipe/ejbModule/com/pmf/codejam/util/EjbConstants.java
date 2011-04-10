@@ -8,5 +8,5 @@ public interface EjbConstants {
 	public final String TABLE_ORDERS = "ORDERS";
 	public final String TABLE_ORDER_DETAILS = "ORDER_DETAILS";
 	public final String NOTIFICATION_SOCIAL_TYPE = "social";
-	public final Object NOTIFICATION_SOCIAL_SOURCE = "website";		
+	public final String NOTIFICATION_SOCIAL_SOURCE = "website";		
 }

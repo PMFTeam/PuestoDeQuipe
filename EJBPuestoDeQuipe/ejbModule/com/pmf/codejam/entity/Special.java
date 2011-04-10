@@ -3,25 +3,16 @@ package com.pmf.codejam.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.management.Notification;
-import javax.management.NotificationBroadcaster;
-import javax.management.NotificationBroadcasterSupport;
-import javax.management.NotificationListener;
 import javax.persistence.*;
 
-import com.pmf.codejam.exception.SocialConnectionException;
-import com.pmf.codejam.social.NotificationUserData;
 import com.pmf.codejam.util.EjbConstants;
 
 /**
  *
- * @author Frederick
+ * @author Garis Suero
  */
 @Entity
-@Table(name = "SPECIALS")
+@Table(name = EjbConstants.TABLE_SPECIALS)
 @NamedQueries({
     @NamedQuery(name = "Special.findAll", query = "SELECT s FROM Special s"),
     @NamedQuery(name = "Special.findById", query = "SELECT s FROM Special s WHERE s.id = :id"),

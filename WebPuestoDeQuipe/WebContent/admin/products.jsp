@@ -9,6 +9,7 @@
 <script src="<%=request.getContextPath()%>/js/jquery.jqGrid.min.js" type="text/javascript"></script>
 <script>
 $.jgrid.useJSON = true;
+var ingredientsPage = CONTEXT_PATH + "/admin/Ingredientes.do";
 //http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3Acommon_rules
 $(document).ready(function() {
 	//alert(CONTEXT_PATH);
@@ -24,10 +25,10 @@ $(document).ready(function() {
 			        page: "page", 
 			        total: "total", 
 			        records: "records", 
-			        repeatitems: false 
+			        repeatitems: false
 			    },
 			    headertitles: true,
-				colNames : [ 'ID', 'Producto', 'Precio'],
+				colNames : [ 'ID', 'Producto', 'Precio', ''],
 				colModel : [ {
 					name : 'productId',
 					index : 'productId',
@@ -41,18 +42,33 @@ $(document).ready(function() {
 				}, {
 					name : 'productName',
 					index : 'productName',
-					width : 390,
+					width : 300,
 					editable : true,
-					required : true
+					required : true,
+					sortable:false, 
+					search:false
 				}, {
 					name : 'price',
 					index : 'price',
-					width : 80,
+					width : 120,
 					editable : true,
 					//edittype : 'select',
 					//editoptions:{value:"0:No;1:Si"},
-					required : true
-				} ],
+					required : true,
+					sortable:false, 
+					search:false
+				},
+				 {
+					name : 'actionClick',
+					index : 'actionClick',
+					width : 120,
+					editable : false,
+					//edittype : 'select',
+					//editoptions:{value:"0:No;1:Si"},
+					required : false,
+					sortable:false, 
+					search:false
+				 } ],
 				rowNum : 20,
 				rowList : [ 20, 40, 60, 80 ],
 				pager : '#prowed3',
@@ -61,6 +77,20 @@ $(document).ready(function() {
 				//mtype:"POST",
 				viewrecords : true,
 				sortorder : "desc",
+				gridComplete: function() {
+			        var grid = jQuery("#rowed3");
+			        var ids = grid.jqGrid('getDataIDs');
+			        for (var i = 0; i < ids.length; i++) {
+			            var rowId = ids[i];
+			            var page = ingredientsPage+"?productId=" +  grid.getCell(rowId, 'productId');
+			            
+			            var actionPopup = "opennormalpopup('"+page+"', 'IngredientToProduct',400 , 450)";
+			            var checkOut = "<input style='height:22px;width:75px;' " +
+			                           "type='button' value='Ingredientes' " +
+			                           "onclick=\""+actionPopup+"\" />";
+			            grid.jqGrid('setRowData', rowId, { actionClick: checkOut });
+			        }
+			    },
 				onSelectRow : function(id) {
 					if (id && id !== lastsel) {
 						jQuery('#rowed3').jqGrid('restoreRow', lastsel);
@@ -76,6 +106,7 @@ $(document).ready(function() {
 		add : false,
 		del : false
 	});
+	
 })
 </script>
 <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/css/ui.jqgrid.css" />
@@ -84,11 +115,10 @@ $(document).ready(function() {
 <h1>Productos</h1>
  			<s:actionerror id="actionError" theme="css_xhtml" />
 			<s:actionmessage id="actionMessage" theme="css_xhtml" />
-
 	<table id="centerTableFull">
 		<tr>
 			<td align="center">
-			<table id="rowed3"></table> <div id="prowed3"></div> <br /> 
+				<table id="rowed3"></table> <div id="prowed3"></div> <br /> 
 			</td>
 		</tr>
 	</table>

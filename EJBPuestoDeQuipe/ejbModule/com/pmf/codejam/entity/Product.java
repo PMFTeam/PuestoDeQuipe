@@ -35,7 +35,7 @@ public class Product implements Serializable{
 	private String description;
 	
 	@Column(name="Price")
-	private float price;
+	private double price;
     
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
 	private Set<Ingredient> ingredients;
@@ -73,10 +73,10 @@ public class Product implements Serializable{
 	public void setDescription(String description){
 		this.description = description;
 	}
-	public float getPrice(){
+	public double getPrice(){
 		return this.price;
 	}
-	public void setPrice(float price){
+	public void setPrice(double price){
 		this.price = price;
 	}
 	public Set<Ingredient> getIngredients(){

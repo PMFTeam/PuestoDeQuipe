@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pmf.codejam.util.DataLayerUtil;
+import com.pmf.codejam.util.IngredientView;
 import com.pmf.codejam.util.JQGridObject;
 import com.pmf.codejam.util.ProductView;
 
@@ -65,7 +66,7 @@ public class ProductsAction extends ActionSupport implements ServletRequestAware
 
 		return SUCCESS;
 	}
-	
+
 	
 	public void products() throws Exception {
 
@@ -127,6 +128,4 @@ public class ProductsAction extends ActionSupport implements ServletRequestAware
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	
-	
 }

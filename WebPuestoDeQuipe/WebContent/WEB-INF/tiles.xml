@@ -8,6 +8,14 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/template/default/footer.jsp" />
 	</definition>
+	
+	<definition template="/template/popup/Base.jsp" name="popupLayout">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/template/popup/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/template/popup/footer.jsp" />
+	</definition>
+	
 	<definition name="/home.tiles" extends="baseLayout">
 		<put-attribute name="title" value="Bienvenido a Puesto De Quipe" />
 		<put-attribute name="body" value="/Home.jsp" />
@@ -24,5 +32,10 @@
 	<definition name="/products.admin.tiles" extends="baseLayout">
 		<put-attribute name="title" value="Listado Productos" />
 		<put-attribute name="body" value="/admin/products.jsp" />
+	</definition>
+	
+	<definition name="/ingredients.admin.tiles" extends="popupLayout">
+		<put-attribute name="title" value="Ingredientes" />
+		<put-attribute name="body" value="/admin/ingredients.jsp" />
 	</definition>
 </tiles-definitions>

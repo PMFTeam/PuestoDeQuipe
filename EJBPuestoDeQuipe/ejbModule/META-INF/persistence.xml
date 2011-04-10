@@ -9,6 +9,7 @@
         <class>com.pmf.codejam.entity.Product</class>
         <class>com.pmf.codejam.entity.OrderEntity</class>
         <class>com.pmf.codejam.entity.OrderDetail</class>
+        <class>com.pmf.codejam.entity.Special</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>  
             <property name="hibernate.hbm2ddl.auto" value="update"/> 

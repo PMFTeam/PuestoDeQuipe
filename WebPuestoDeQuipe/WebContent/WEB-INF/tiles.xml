@@ -12,4 +12,12 @@
 		<put-attribute name="title" value="Bienvenido a Puesto De Quipe" />
 		<put-attribute name="body" value="/Home.jsp" />
 	</definition>
+	<definition name="/order.tiles" extends="baseLayout">
+		<put-attribute name="title" value="Ordenes" />
+		<put-attribute name="body" value="/order/order.jsp" />
+	</definition>
+	<definition name="/orderProcessed.tiles" extends="baseLayout">
+		<put-attribute name="title" value="Crea tu Orden" />
+		<put-attribute name="body" value="/order/orderProcessed.jsp" />
+	</definition>
 </tiles-definitions>

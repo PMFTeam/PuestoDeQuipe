@@ -21,5 +21,8 @@
 		<action name="Home" class="com.pmf.codejam.web.action.Home">
 			<result name="success" type="tiles">/home.tiles</result>
 		</action>
+		<action name="Home" class="com.pmf.codejam.web.action.order.Order">
+			<result name="success" type="tiles">/order.tiles</result>
+		</action>
 	</package>
 </struts>

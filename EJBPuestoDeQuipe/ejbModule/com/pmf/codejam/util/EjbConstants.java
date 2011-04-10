@@ -7,4 +7,6 @@ public interface EjbConstants {
 	public final String TABLE_PRODUCTS = "Products";
 	public final String TABLE_ORDER = "Order";
 	public final String TABLE_ORDER_DETAIL = "OrderDetail";
+	public final Object NOTIFICATION_SOCIAL_SOURCE = "website";
+	public final String NOTIFICATION_SOCIAL_TYPE = "social";
 }

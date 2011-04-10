@@ -37,7 +37,7 @@ public class Product implements Serializable{
 	@Column(name="Price")
 	private float price;
     
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = EjbConstants.TABLE_PRODUCTS, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
 	private Set<Ingredient> ingredients;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)

@@ -36,12 +36,11 @@
 		<action name="Ingredientes" class="com.pmf.codejam.web.action.admin.IngredientsAction">
 			<result name="success" type="tiles">/ingredients.admin.tiles</result>
 		</action>
-		<action name="grabarIngredientes" class="com.pmf.codejam.web.action.admin.IngredientsAction" method="grabarIngrediente">
-			<result name="success" type="tiles">/ingredients.admin.tiles</result>
-		</action>		
 	</package>
 		
 	<package name="adminAjaxCalls" namespace="/ajax/admin" extends="commons">
+		<action name="grabarIngredientes" class="com.pmf.codejam.web.action.admin.IngredientsAction" method="saveIngredient" />
+		<action name="ingredientesPorProducto" class="com.pmf.codejam.web.action.admin.IngredientsAction" method="ingredientsPerProduct" />	
 		<action name="listadoProductos" class="com.pmf.codejam.web.action.admin.ProductsAction" method="products" />
 		<action name="actualizarProductos" class="com.pmf.codejam.web.action.admin.ProductsAction" method="saveProduct" />
 	</package>

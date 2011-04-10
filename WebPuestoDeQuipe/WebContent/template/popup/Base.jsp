@@ -9,8 +9,9 @@
 	<link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/template/default/css/admin/styles.css" />
 	<link type="text/css" href="<%=request.getContextPath()%>/js/themes/blitzer/jquery.ui.all.css" rel="stylesheet" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-1.8.custom.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-1.8.1.custom.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/commons.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/ui/jquery.ui.core.js"></script>
 	<script type="text/javascript">
 		var CONTEXT_PATH = "<%=request.getContextPath()%>";
 	</script>

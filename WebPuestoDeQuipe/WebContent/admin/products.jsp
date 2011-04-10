@@ -50,6 +50,7 @@ $(document).ready(function() {
 				}, {
 					name : 'price',
 					index : 'price',
+					align : "right",
 					width : 120,
 					editable : true,
 					//edittype : 'select',
@@ -62,6 +63,7 @@ $(document).ready(function() {
 					name : 'actionClick',
 					index : 'actionClick',
 					width : 120,
+					align : "center",
 					editable : false,
 					//edittype : 'select',
 					//editoptions:{value:"0:No;1:Si"},
@@ -84,7 +86,7 @@ $(document).ready(function() {
 			            var rowId = ids[i];
 			            var page = ingredientsPage+"?productId=" +  grid.getCell(rowId, 'productId');
 			            
-			            var actionPopup = "opennormalpopup('"+page+"', 'IngredientToProduct',400 , 450)";
+			            var actionPopup = "opennormalpopup('"+page+"', 'IngredientToProduct',400 , 380)";
 			            var checkOut = "<input style='height:22px;width:75px;' " +
 			                           "type='button' value='Ingredientes' " +
 			                           "onclick=\""+actionPopup+"\" />";
@@ -106,7 +108,6 @@ $(document).ready(function() {
 		add : false,
 		del : false
 	});
-	
 })
 </script>
 <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/css/ui.jqgrid.css" />

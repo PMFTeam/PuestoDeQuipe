@@ -33,9 +33,9 @@ public class DataLayerUtil {
 	public static List<IngredientView> getAllIngredients() {
 		List<IngredientView> ingredients = new ArrayList<IngredientView>();
 		
-		ingredients.add(new IngredientView("Aceite Crisol Producto", 1, new Double(0.5)));
-		ingredients.add(new IngredientView("Harina  Producto", 2, new Double(5.5)));
-		ingredients.add(new IngredientView("Trigo  Producto", 3, new Double(1.5)));
+		ingredients.add(new IngredientView("Aceite Crisol All", 1, new Double(0.5)));
+		ingredients.add(new IngredientView("Harina  All", 2, new Double(5.5)));
+		ingredients.add(new IngredientView("Trigo  All", 3, new Double(1.5)));
 		return ingredients;
 	}
 	

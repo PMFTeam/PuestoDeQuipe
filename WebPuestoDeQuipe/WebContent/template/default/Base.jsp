@@ -7,11 +7,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
-	<link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/templates/default/css/styles.css" />
+	<link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/template/default/css/styles.css" />
 <!-- 	<link type="text/css" href="<%=request.getContextPath()%>/css/blitzer/jquery-ui-1.8.custom.css" rel="Stylesheet" />  -->	
 	<link type="text/css" href="<%=request.getContextPath()%>/js/themes/blitzer/jquery.ui.all.css" rel="stylesheet" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-1.8.custom.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-1.8.1.custom.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/commons.js"></script>
 	<script type="text/javascript">
 		droplinemenu.buildmenu("topmenu");

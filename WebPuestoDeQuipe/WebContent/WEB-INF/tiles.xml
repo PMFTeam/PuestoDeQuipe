@@ -20,4 +20,9 @@
 		<put-attribute name="title" value="Crea tu Orden" />
 		<put-attribute name="body" value="/order/orderProcessed.jsp" />
 	</definition>
+	
+	<definition name="/products.admin.tiles" extends="baseLayout">
+		<put-attribute name="title" value="Listado Productos" />
+		<put-attribute name="body" value="/admin/products.jsp" />
+	</definition>
 </tiles-definitions>

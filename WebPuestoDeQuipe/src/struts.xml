@@ -28,4 +28,10 @@
 			<result name="success" type="tiles">/orderProcessed.tiles</result>
 		</action>
 	</package>
+	
+	<package name="adminess" namespace="/admin" extends="commons">
+		<action name="Productos" class="com.pmf.codejam.web.action.admin.ProductsAction">
+			<result name="success" type="tiles">/products.admin.tiles</result>
+		</action>	
+	</package>
 </struts>

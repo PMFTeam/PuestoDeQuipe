@@ -10,6 +10,30 @@
 <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/css/ui.jqgrid.css" />
 <br />
 <br />
+<s:form action="ProcesarEspeciales" namespace="/admin" method="POST" theme="css_xhtml">
 <h1>Especiales</h1>
+Crear Especial
+	private String description;
+	private String summary;
+	private String expirationDate;
+	
+<table class="normalTable" width="450px" id="specialForm">
+<tr>
+	<td>Descripci&oacute;n: </td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>Oferta: </td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>Fecha expiraci&oacute;n: </td>
+	<td></td>
+	<td></td>
+</tr>
+</table>
+</s:form>
 
 

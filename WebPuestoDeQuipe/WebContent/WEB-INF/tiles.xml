@@ -43,6 +43,11 @@
 		<put-attribute name="title" value="Ingredientes" />
 		<put-attribute name="body" value="/admin/ingredients.jsp" />
 	</definition>
+
+	<definition name="/special.admin.tiles" extends="baseLayout">
+		<put-attribute name="title" value="Especiales / Combos" />
+		<put-attribute name="body" value="/admin/special.jsp" />
+	</definition>
 	
 	<definition name="/login.admin.tiles" extends="baseLayout">
 		<put-attribute name="title" value="Iniciar sesion" />

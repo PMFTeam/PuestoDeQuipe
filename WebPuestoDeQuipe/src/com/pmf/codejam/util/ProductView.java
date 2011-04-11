@@ -6,18 +6,18 @@ public class ProductView {
 	private String productName;
 	private	double price;
 	private int quantity;
-	
-	
-	
+
+
+
 	public ProductView(int productId,String productName,double price) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
 		this.quantity = 0;
-		
+
 	}
-	
+
 	public String getProductName() {
 		return productName;
 	}
@@ -80,6 +80,4 @@ public class ProductView {
 				+ productName + ", price=" + price + ", quantity=" + quantity
 				+ "]";
 	}
-	
-
 }

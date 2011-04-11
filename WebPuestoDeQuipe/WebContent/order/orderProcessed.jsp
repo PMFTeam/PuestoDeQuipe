@@ -1,1 +1,1 @@
-Su Orden ha sido procesada. Segundo JSP.
+Su Orden ha sido procesada. Gracias por Preferirnos!

@@ -1,6 +1,9 @@
 package com.pmf.codejam.web.action.admin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +12,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import com.opensymphony.xwork2.ActionSupport;
 import com.pmf.codejam.util.Constants;
+import com.pmf.codejam.util.DataLayerUtil;
+import com.pmf.codejam.util.SpecialView;
 
 public class SpecialAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 	private static final long serialVersionUID = 1L;
@@ -28,9 +33,22 @@ public class SpecialAction extends ActionSupport implements ServletRequestAware,
 	}
 	public String save() throws Exception {
 		
-		System.out.println("Social: " + social);
-		System.out.println("SocialList: " + socialNetworks.toString());
-		
+		try {
+			Calendar calendar = null;
+			if (expirationDate != null && expirationDate.length() > 0) {
+				calendar = Calendar.getInstance();
+				calendar.setTime(Constants.COMMON_DATE_FORMAT.parse(expirationDate));
+			}
+			if (summary == null || summary.length() > 500 || description == null || description.length() > 140) 
+				throw new Exception();
+			
+			SpecialView special = new SpecialView(getDescription(), getSummary(), calendar, Arrays.asList(social.split(",")));
+			DataLayerUtil.addSpecial(special);
+			
+		} catch (Exception ex) {
+			addActionError("Error en los datos");
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	

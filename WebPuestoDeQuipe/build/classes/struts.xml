@@ -20,10 +20,11 @@
 		<action name="Home" class="com.pmf.codejam.web.action.Home">
 			<result name="success" type="tiles">/home.tiles</result>
 		</action>
-		<action name="Ordenar" class="com.pmf.codejam.web.action.order.Order">
+		
+		<action name="Ordenar" class="com.pmf.codejam.web.action.order.OrderAction">
 			<result name="success" type="tiles">/order.tiles</result>
 		</action>
-		<action name="procesarOrden" class="com.pmf.codejam.web.action.order.Order" method="processOrder">
+		<action name="procesarOrden" class="com.pmf.codejam.web.action.order.OrderAction" method="processOrder">
 			<result name="success" type="tiles">/orderProcessed.tiles</result>
 		</action>
 		<action name="Nosotros" class="com.pmf.codejam.web.action.Us">

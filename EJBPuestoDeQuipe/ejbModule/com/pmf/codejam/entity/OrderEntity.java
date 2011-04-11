@@ -6,6 +6,7 @@
 package com.pmf.codejam.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -34,7 +35,8 @@ import com.pmf.codejam.util.EjbConstants;
     @NamedQuery(name = "OrderEntity.findByEmail", query = "SELECT o FROM OrderEntity o WHERE o.email = :email"),
     @NamedQuery(name = "OrderEntity.findByCustomerName", query = "SELECT o FROM OrderEntity o WHERE o.customerName = :customerName"),
     @NamedQuery(name = "OrderEntity.findByAddress", query = "SELECT o FROM OrderEntity o WHERE o.address = :address"),
-    @NamedQuery(name = "OrderEntity.findByPhone", query = "SELECT o FROM OrderEntity o WHERE o.phone = :phone")})
+    @NamedQuery(name = "OrderEntity.findByPhone", query = "SELECT o FROM OrderEntity o WHERE o.phone = :phone"),
+    @NamedQuery(name = "OrderEntity.count", query = "select count(o) from OrderEntity as o")})
 public class OrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,27 +54,14 @@ public class OrderEntity implements Serializable {
     @Column(name = "PHONE", length = 20)
     private String phone;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity", fetch = FetchType.LAZY)
-    private Set<OrderDetail> orderItems;
+    private Set<OrderDetail> orderDetails;
    
 
     public OrderEntity() {
     }
 
-    public OrderEntity(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public OrderEntity(Integer orderNo, String address) {
-        this.orderNo = orderNo;
-        this.address = address;
-    }
-
     public Integer getOrderNo() {
         return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
     }
 
     public String getEmail() {
@@ -107,12 +96,16 @@ public class OrderEntity implements Serializable {
         this.phone = phone;
     }
 
-    public Set<OrderDetail> getOrderItems() {
-        return orderItems;
+    public Set<OrderDetail> getOrderDetails() {
+        if (orderDetails == null) {
+        	orderDetails =  new HashSet<OrderDetail>();
+        }
+        
+        return orderDetails;
     }
 
-    public void setOrderItems(Set<OrderDetail> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     @Override

@@ -10,4 +10,5 @@ public interface Constants {
 	public final String GLOBAL_USER_SESSION_KEY = "USER";
 	public final String SOCIAL_FACEBOOK = "Facebook";
 	public final String SOCIAL_TWITTER = "Twitter";
+	public final int 	SOCIAL_TWITTER_LENGTH = 140;
 }

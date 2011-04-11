@@ -193,3 +193,28 @@ function onlyNumbers(event) {
 		} 	
 	}	
 }
+
+function addToBill() {
+	var element = document.getElementById("product");
+	var productValue = element.options[element.selectedIndex].value;
+	var productText = element.options[element.selectedIndex].text;
+	var productQuantity = document.getElementById("quantity").value;
+	var texteArea = document.getElementById("bill");
+	var productsSelected = document.getElementById("productsSelected");
+	
+	if(texteArea.value != null &&
+	texteArea.value.length == 0) {
+		texteArea.value += new String((productQuantity+" "+productText));
+
+	} else {
+		texteArea.value += new String(("\n"+productQuantity+" "+productText));	
+	}
+	
+	
+	if(productQuantity == '' || productQuantity == null) {
+		productQuantity = "1";
+	}
+
+	productsSelected.value+="&";
+	productsSelected.value+=(productValue+","+productQuantity);
+}

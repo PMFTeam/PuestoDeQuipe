@@ -1,6 +1,7 @@
 package com.pmf.codejam.util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.pmf.codejam.ejb.ProductService;
@@ -64,5 +65,17 @@ public class DataLayerUtil {
 		catch(ProductException ex){
 			throw ex;
 		}
+	}
+	
+	public static void addSpecial(SpecialView special) {
+		
+	}
+	
+	public static void updateSpecial(SpecialView special) {
+		
+	}
+	
+	public static void deleteSpecial(SpecialView special) {
+		
 	}
 }

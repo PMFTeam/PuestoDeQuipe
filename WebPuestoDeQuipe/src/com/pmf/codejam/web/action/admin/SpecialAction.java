@@ -1,10 +1,14 @@
 package com.pmf.codejam.web.action.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import com.opensymphony.xwork2.ActionSupport;
+import com.pmf.codejam.util.Constants;
 
 public class SpecialAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 	private static final long serialVersionUID = 1L;
@@ -14,22 +18,43 @@ public class SpecialAction extends ActionSupport implements ServletRequestAware,
 	private String description;
 	private String summary;
 	private String expirationDate;
+	private List<String> socialNetworks;
+	private String social;
 
+	public SpecialAction() {
+		socialNetworks = new ArrayList<String>();
+		socialNetworks.add(Constants.SOCIAL_FACEBOOK);
+		socialNetworks.add(Constants.SOCIAL_TWITTER);
+	}
 	public String save() throws Exception {
 		
+		System.out.println("Social: " + social);
+		System.out.println("SocialList: " + socialNetworks.toString());
 		
 		return SUCCESS;
 	}
 	
 	
 	public String execute() throws Exception {
-
+		
 		return SUCCESS;
 	}
 	
 	
 	
 	
+	public List<String> getSocialNetworks() {
+		return socialNetworks;
+	}
+	public void setSocialNetworks(List<String> socialNetworks) {
+		this.socialNetworks = socialNetworks;
+	}
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
+	}
 	public String getDescription() {
 		return description;
 	}

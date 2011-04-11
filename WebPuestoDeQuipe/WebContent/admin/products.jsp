@@ -10,14 +10,11 @@
 <script>
 $.jgrid.useJSON = true;
 var ingredientsPage = CONTEXT_PATH + "/admin/Ingredientes.do";
-//http://www.trirand.com/jqgridwiki/doku.php?id=wiki%3Acommon_rules
 $(document).ready(function() {
-	//alert(CONTEXT_PATH);
 	var lastsel;
 	jQuery("#rowed3").jqGrid(
 			{
 				url : CONTEXT_PATH+'/ajax/admin/listadoProductos.do',
-				//url : '/autoWEB/text.html',
 				datatype: "json",
 			    ajaxGridOptions: { contentType: "application/json" },
 			    jsonReader : { 
@@ -53,8 +50,6 @@ $(document).ready(function() {
 					align : "right",
 					width : 120,
 					editable : true,
-					//edittype : 'select',
-					//editoptions:{value:"0:No;1:Si"},
 					required : true,
 					sortable:false, 
 					search:false
@@ -65,8 +60,6 @@ $(document).ready(function() {
 					width : 120,
 					align : "center",
 					editable : false,
-					//edittype : 'select',
-					//editoptions:{value:"0:No;1:Si"},
 					required : false,
 					sortable:false, 
 					search:false
@@ -75,8 +68,6 @@ $(document).ready(function() {
 				rowList : [ 20, 40, 60, 80 ],
 				pager : '#prowed3',
 				sortname : 'productId',
-				//postData: {piezaId : lastsel},
-				//mtype:"POST",
 				viewrecords : true,
 				sortorder : "desc",
 				gridComplete: function() {
@@ -105,8 +96,8 @@ $(document).ready(function() {
 			});
 	jQuery("#rowed3").jqGrid('navGrid', "#prowed3", {
 		edit : false,
-		add : false,
-		del : false
+		add : true,
+		del : true
 	});
 })
 </script>

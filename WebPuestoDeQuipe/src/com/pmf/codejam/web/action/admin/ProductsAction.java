@@ -41,15 +41,13 @@ public class ProductsAction extends ActionSupport implements ServletRequestAware
 			String productId = (request.getParameter("id") + "").trim();
 			String price = request.getParameter("price");
 			String productName = (request.getParameter("productName") + "").trim();
-
-			if ("edit".equalsIgnoreCase(operation) || "update".equalsIgnoreCase(operation)) {
-				ProductView product = new ProductView(Integer.parseInt(productId), productName, Double.parseDouble(price));
-				// Do whatever to save the product
+			ProductView product = new ProductView(Integer.parseInt(productId), productName, Double.parseDouble(price));
+			if ("edit".equalsIgnoreCase(operation) || "update".equalsIgnoreCase(operation)) {				
+				DataLayerUtil.updateProduct(product);
 			}  else if ("delete".equalsIgnoreCase(operation)) {
-				// do what ever to delete a product.. by it's ID...
-			} else if ("add".equalsIgnoreCase(operation)) {
-				ProductView product = new ProductView(Integer.parseInt(productId), productName, Double.parseDouble(price));
-				// do whatever to add a new Product...
+				DataLayerUtil.deleteProduct(product);				
+			} else if ("add".equalsIgnoreCase(operation)) {				
+				DataLayerUtil.addProduct(product);
 			} else {
 				throw new Exception("No se especifico ninguna operacion...");
 			}
@@ -66,8 +64,6 @@ public class ProductsAction extends ActionSupport implements ServletRequestAware
 
 		return SUCCESS;
 	}
-
-	
 	public void products() throws Exception {
 
 		String catid= (request.getParameter("catid")+"").trim();

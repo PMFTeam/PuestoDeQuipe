@@ -44,19 +44,18 @@ public class ProductsAction extends ActionSupport implements ServletRequestAware
 			String productName = (request.getParameter("productName") + "").trim();
 			ProductView product = new ProductView(Integer.parseInt(productId), productName, Double.parseDouble(price));
 			
-			if(!(BusinessValidator.isNumber(productId)&&
-				 BusinessValidator.isValidProductName(productName)&& 
+			if(!(BusinessValidator.isNumber(productId)||
+				 BusinessValidator.isValidProductName(productName)|| 
 				 BusinessValidator.isNumber(price))){
 					return ERROR;
 			}
 			if ("edit".equalsIgnoreCase(operation) || "update".equalsIgnoreCase(operation)) {				
-				DataLayerUtil.updateProduct(product);
-				
+				DataLayerUtil.updateProduct(product);				
 			}  else if ("delete".equalsIgnoreCase(operation)) {
 				DataLayerUtil.deleteProduct(product);				
-			} else if ("add".equalsIgnoreCase(operation)) {				
+			}  else if ("add".equalsIgnoreCase(operation)) {				
 				DataLayerUtil.addProduct(product);
-			} else {
+			}  else {
 				throw new Exception("No se especifico ninguna operacion...");
 			}
 		} catch (NumberFormatException ex) {

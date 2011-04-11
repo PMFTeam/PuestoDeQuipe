@@ -13,7 +13,7 @@ public interface ProductServiceLocal {
     public List<Product> findProducts(int maxResults, int firstResult);
     public Product findProduct(Integer id);
     public int getProductsCount();
-	public void addIngredient(int productId, int ingredientId, int quantity)throws IngredientException;
-	public boolean updateIngredient(int idIngredient,int idProducto,int quantityNeeded) throws IngredientException;
+	public void addIngredient(int productId, int ingredientId, double quantity)throws IngredientException;
+	public boolean updateIngredient(int idIngredient,int idProducto,double quantityNeeded) throws IngredientException;
 	public boolean deleteIngredient(int productId, int ingredientId) throws IngredientException;	
 }

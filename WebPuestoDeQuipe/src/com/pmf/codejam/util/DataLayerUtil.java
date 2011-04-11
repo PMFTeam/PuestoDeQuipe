@@ -8,9 +8,11 @@ import com.pmf.codejam.ejb.ProductService;
 import com.pmf.codejam.ejb.ProductServiceLocal;
 import com.pmf.codejam.ejb.SpecialService;
 import com.pmf.codejam.ejb.SpecialServiceLocal;
+import com.pmf.codejam.entity.Ingredient;
 import com.pmf.codejam.entity.Product;
 import com.pmf.codejam.entity.Special;
 import com.pmf.codejam.exception.IllegalOrphanException;
+import com.pmf.codejam.exception.IngredientException;
 import com.pmf.codejam.exception.ProductException;
 import com.pmf.codejam.exception.SpecialException;
 
@@ -73,6 +75,19 @@ public class DataLayerUtil {
 		}
 	}
 	
+	public static void addIngredient(IngredientView ingredient) throws IngredientException ,Exception{
+		
+		ProductServiceLocal prodService = new ProductService();	
+		prodService.addIngredient(ingredient.getProductId(), ingredient.getIngredientId(), ingredient.getQuantity());		
+	}
+	public static void deleteIngredient(IngredientView ingredient) throws IngredientException , Exception {
+			ProductServiceLocal proService = new ProductService();
+			proService.deleteIngredient(ingredient.getProductId(), ingredient.getIngredientId());	
+	}
+	public static void editIngredient(IngredientView ingredient) throws IngredientException , Exception {
+		ProductServiceLocal proService = new ProductService();
+		proService.updateIngredient(ingredient.getIngredientId(), ingredient.getProductId(), ingredient.getQuantity());	
+}
 	public static void addSpecial(SpecialView special) {
 		
 		Special specialEntity = new Special();

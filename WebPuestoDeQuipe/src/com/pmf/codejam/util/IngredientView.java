@@ -14,6 +14,12 @@ public class IngredientView {
 		this.ingredientId = ingredientId;
 		this.quantity = quantity;
 	}
+	public IngredientView(int productId, int ingredientId,	double quantity) {
+		super();
+		this.productId = productId;
+		this.ingredientId = ingredientId;
+		this.quantity = quantity;
+	}
 	
 	public IngredientView(int productId, String ingredientName,
 			int ingredientId, double quantity) {

@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
+import com.pmf.codejam.util.BusinessValidator;
 import com.pmf.codejam.util.DataLayerUtil;
 import com.pmf.codejam.util.IngredientView;
 import com.pmf.codejam.util.JQGridObject;
@@ -66,7 +67,7 @@ public class IngredientsAction extends ActionSupport implements ServletRequestAw
 		response.getOutputStream().flush();
 		
 	}
-	public void saveIngredient() throws Exception {
+	public String saveIngredient() throws Exception {
 		productToAdd = (request.getParameter("productId")+"").trim();
 		ingredientId = (request.getParameter("ingredientName")+"").trim();
 		quantity = (request.getParameter("quantity")+"").trim();
@@ -74,14 +75,23 @@ public class IngredientsAction extends ActionSupport implements ServletRequestAw
 		
 		ingredientId = (ingredientId == null || ingredientId.length() <= 0 ? (request.getParameter("id")+"").trim() : "");
 		
-		// id
 		
-		if("add".equalsIgnoreCase(oper)) {
-			// TODO validate and insert ingredient
+		if(!(BusinessValidator.isNumber(productToAdd)||
+			 BusinessValidator.isNumber(ingredientId)|| 
+			 BusinessValidator.isNumber(quantity))){
+					return ERROR;			 
+			}
+		int productId = Integer.parseInt(productToAdd);
+		int idIngredient = Integer.parseInt(ingredientId);
+		double quantityNeeded = Double.parseDouble(quantity);
+		IngredientView ingredient = new IngredientView(productId,idIngredient,quantityNeeded);
+		
+		if("add".equalsIgnoreCase(oper)) {										
+			DataLayerUtil.addIngredient(ingredient);
 		} else if ("edit".equalsIgnoreCase(oper)) {
-			// TODO validate and edit quantity of ingredient
+			DataLayerUtil.editIngredient(ingredient);
 		} else if ("del".equalsIgnoreCase(oper)) {
-			// TODO validate and delete ingredient
+			DataLayerUtil.deleteIngredient(ingredient);
 		} else {
 			// invalid operation...
 			// TODO
@@ -90,6 +100,7 @@ public class IngredientsAction extends ActionSupport implements ServletRequestAw
 		System.out.println("Ingredient " + ingredientId);
 		System.out.println("Quantity " + quantity);
 		// Whatever we need to do to save an ingredient as part of a product...
+		return SUCCESS;
 	}
 	public String execute() throws Exception {
 

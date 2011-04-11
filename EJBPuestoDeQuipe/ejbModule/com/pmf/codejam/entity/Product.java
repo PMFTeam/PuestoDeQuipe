@@ -40,7 +40,7 @@ public class Product implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
 	private Set<Ingredient> ingredients;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private Set<OrderDetail> orderDetails;
 	
     public Product(){

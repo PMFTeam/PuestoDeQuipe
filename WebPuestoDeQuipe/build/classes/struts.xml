@@ -56,6 +56,21 @@
 			<result name="login" type="tiles">/login.admin.tiles</result>
 			<result name="success" type="tiles">/ingredients.admin.tiles</result>
 		</action>
+		<action name="Especiales" class="com.pmf.codejam.web.action.admin.SpecialAction">
+			<interceptor-ref name="login" /> 
+		 	<interceptor-ref name="servletConfig"/>
+    		<interceptor-ref name="basicStack"/>
+			<result name="login" type="tiles">/login.admin.tiles</result>
+			<result name="success" type="tiles">/special.admin.tiles</result>
+		</action>
+		<action name="ProcesarEspeciales" class="com.pmf.codejam.web.action.admin.SpecialAction" method="save">
+			<interceptor-ref name="login" /> 
+		 	<interceptor-ref name="servletConfig"/>
+    		<interceptor-ref name="basicStack"/>
+			<result name="login" type="tiles">/login.admin.tiles</result>
+			<result name="success" type="tiles">/special.admin.tiles</result>
+			<result name="error" type="tiles">/special.admin.tiles</result>
+		</action>
 	</package>
 		
 	<package name="adminAjaxCalls" namespace="/ajax/admin" extends="commons">

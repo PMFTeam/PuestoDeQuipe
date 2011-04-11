@@ -4,13 +4,13 @@
 
 <table id="tableHeader" border="0">
 	<tr>
-	<td width="30%" valign="top" align="left">
-		<h2>PuestoDeQuipe.com</h2>
+	<td width="25%" valign="top" align="left">
+		&nbsp;
 	</td>
-	<td width="50%" valign="top" height="5px">
-
+	<td width="50%" valign="top" height="5px" align="center">
+		<img src="<%=request.getContextPath()%>/images/Logo.png" border="0" />
 	</td>
-	<td width="146px" valign="top" height="5px">
+	<td width="25%" valign="top" height="5px">
 		<div id="headerLinks">
 		<s:if test="#session.USER != null">
 			Bienvenido <s:property value="#session.USER" />

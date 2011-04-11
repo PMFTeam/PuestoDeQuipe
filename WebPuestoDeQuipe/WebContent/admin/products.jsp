@@ -52,7 +52,8 @@ $(document).ready(function() {
 					editable : true,
 					required : true,
 					sortable:false, 
-					search:false
+					search:false,
+					editrules:{number:true }
 				},
 				 {
 					name : 'actionClick',

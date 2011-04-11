@@ -14,7 +14,8 @@ import java.io.Serializable;
    @NamedQuery(name = "Ingredient.findAll", query = "SELECT i FROM Ingredient i"),
    @NamedQuery(name = "Ingredient.findByProductId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.productId = :productId"),
    @NamedQuery(name = "Ingredient.findByInventoryId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.inventoryId = :inventoryId"),
-   @NamedQuery(name = "Ingredient.findByQuantity", query = "SELECT i FROM Ingredient i WHERE i.quantity = :quantity")})
+   @NamedQuery(name = "Ingredient.findByQuantityNeeded", query = "SELECT i FROM Ingredient i WHERE i.quantityNeeded = :quantityNeeded")})
+
 public class Ingredient implements Serializable{
 	//Merge Test. Frederick Apr 2009, 2011
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class Ingredient implements Serializable{
 	private InventoryItem inventoryItem;
 		   
     @Basic(optional = false)
-    @Column(name = "QUANTITY", nullable = false)	
+    @Column(name = "QUANTITY_NEEDED", nullable = false)	
 	private double quantityNeeded;
 	
     public Ingredient() {
@@ -50,6 +51,8 @@ public class Ingredient implements Serializable{
         this.ingredientPK = new IngredientPK(productId, inventoryId);
     }
     
+    
+    
 	public Product getProduct() {
 		return product;
 	}
@@ -61,7 +64,16 @@ public class Ingredient implements Serializable{
 	}
 	public void setInventoryItem(InventoryItem inventoryItem) {
 		this.inventoryItem = inventoryItem;
-	}	
+	}
+	
+    public IngredientPK getIngredientPK() {
+        return ingredientPK;
+    }
+
+    public void setIngredientPK(IngredientPK ingredientPK) {
+        this.ingredientPK = ingredientPK;
+    }
+
 	public double getQuantityNeeded() {
 		return quantityNeeded;
 	}

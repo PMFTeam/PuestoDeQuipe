@@ -41,7 +41,7 @@ public class Product implements Serializable{
 	private Set<Ingredient> ingredients;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId", fetch = FetchType.LAZY)
-    private Set<OrderDetail> orderItems;
+    private Set<OrderDetail> orderDetails;
 	
     public Product(){
     	
@@ -85,12 +85,12 @@ public class Product implements Serializable{
 	public void setIngredients(Set<Ingredient> ingredients){
 		this.ingredients = ingredients;
 	}
-    public Set<OrderDetail> getOrderItems() {
-        return orderItems;
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setOrderItems(Set<OrderDetail> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 	//Customs methods.....
     

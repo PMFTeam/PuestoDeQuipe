@@ -4,6 +4,7 @@ public class ProductView {
 
 	private int productId;
 	private String productName;
+	private String description = "";
 	private	double price;
 	private int quantity;
 
@@ -16,6 +17,14 @@ public class ProductView {
 		this.price = price;
 		this.quantity = 0;
 
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getProductName() {

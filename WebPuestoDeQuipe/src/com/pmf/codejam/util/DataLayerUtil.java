@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.pmf.codejam.ejb.ProductService;
+import com.pmf.codejam.ejb.ProductServiceLocal;
 import com.pmf.codejam.ejb.SpecialService;
 import com.pmf.codejam.ejb.SpecialServiceLocal;
 import com.pmf.codejam.entity.Product;
@@ -50,22 +51,22 @@ public class DataLayerUtil {
 		Product prodEntity = new Product();
 		pro.setProductName(pro.getProductName());
 		pro.setPrice(pro.getPrice());
-		ProductService prodService = new ProductService();
-		prodService.addProduct(prodEntity);
+		ProductServiceLocal prodService = new ProductService();
+		prodService.create(prodEntity);
 	}
-	public static void updateProduct(ProductView pro) throws ProductException {
+	public static void updateProduct(ProductView pro) throws IllegalOrphanException, Exception {
 		try{
-			ProductService prodService = new ProductService();
-			prodService.updateProduct(pro.getProductId(),pro.getProductName(),pro.getPrice());
+			ProductServiceLocal prodService = new ProductService();
+			prodService.edit(pro.getProductId(),pro.getProductName(), pro.getDescription(),pro.getPrice());
 		}
 		catch(ProductException ex){
 			throw ex;
 		}			
 	}
-	public static void deleteProduct(ProductView pro) throws ProductException {
+	public static void deleteProduct(ProductView pro) throws ProductException, IllegalOrphanException {
 		try{
-			ProductService proService = new ProductService();
-			proService.deleteProduct(pro.getProductId());
+			ProductServiceLocal proService = new ProductService();
+			proService.destroy(pro.getProductId());
 		}
 		catch(ProductException ex){
 			throw ex;

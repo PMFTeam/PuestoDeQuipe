@@ -139,7 +139,7 @@ public class OrderAction extends ActionSupport implements ServletRequestAware, S
 			product.setId(productView.getProductId());
 			product.setName(productView.getProductName());
 			product.setPrice(productView.getPrice());
-			orderDetail.setProductId(product);
+			orderDetail.setProduct(product);
 			orderDetail.setQuantity(new Integer(productView.getQuantity()).shortValue());
 			orderDetails.add(orderDetail);
 			

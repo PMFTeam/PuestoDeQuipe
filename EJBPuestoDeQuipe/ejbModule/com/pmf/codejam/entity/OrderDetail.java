@@ -40,7 +40,7 @@ public class OrderDetail implements Serializable {
     private OrderEntity orderEntity;
     @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Product productId;
+    private Product product;
 
     public OrderDetail() {
     }
@@ -82,12 +82,12 @@ public class OrderDetail implements Serializable {
         this.orderEntity = orderEntity;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class OrderDetail implements Serializable {
 	@Override
 	public String toString() {
 		return "OrderDetail [orderDetailPK=" + orderDetailPK + ", quantity="
-				+ quantity + ", productId=" + productId + "]";
+				+ quantity + ", productId=" + product + "]";
 	}
 
 

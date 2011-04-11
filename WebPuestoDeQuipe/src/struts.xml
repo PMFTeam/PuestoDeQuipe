@@ -88,4 +88,5 @@
 		<action name="listadoProductos" class="com.pmf.codejam.web.action.admin.ProductsAction" method="products" />
 		<action name="actualizarProductos" class="com.pmf.codejam.web.action.admin.ProductsAction" method="saveProduct" />
 	</package>
+	
 </struts>

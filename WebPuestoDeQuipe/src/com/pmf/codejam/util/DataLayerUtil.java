@@ -5,8 +5,13 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.pmf.codejam.ejb.ProductService;
+import com.pmf.codejam.ejb.SpecialService;
+import com.pmf.codejam.ejb.SpecialServiceLocal;
 import com.pmf.codejam.entity.Product;
+import com.pmf.codejam.entity.Special;
+import com.pmf.codejam.exception.IllegalOrphanException;
 import com.pmf.codejam.exception.ProductException;
+import com.pmf.codejam.exception.SpecialException;
 
 public class DataLayerUtil {
 
@@ -69,13 +74,52 @@ public class DataLayerUtil {
 	
 	public static void addSpecial(SpecialView special) {
 		
+		Special specialEntity = new Special();
+		specialEntity.setDescription(special.getDescription());
+		specialEntity.setSummary(special.getSummary());
+
+		if (special.getExpirationDate() != null &&  special.getExpirationDate().getTime() != null)
+			specialEntity.setExpirationDate(special.getExpirationDate().getTime());
+		
+		SpecialServiceLocal specialService = new SpecialService();
+		specialService.create(specialEntity);
 	}
 	
 	public static void updateSpecial(SpecialView special) {
+		SpecialServiceLocal specialService = new SpecialService();
+		
+		Special specialEntity = specialService.findSpecial(new Long(special.getSpecialId()));
+		specialEntity.setDescription(special.getDescription());
+		specialEntity.setSummary(special.getSummary());
+
+		if (special.getExpirationDate() != null &&  special.getExpirationDate().getTime() != null)
+			specialEntity.setExpirationDate(special.getExpirationDate().getTime());
+		
+		try {
+			specialService.edit(specialEntity);
+		} catch (IllegalOrphanException e) {
+			e.printStackTrace();
+		} catch (SpecialException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
-	public static void deleteSpecial(SpecialView special) {
+	public static void deleteSpecial(Long specialId) {
+		SpecialServiceLocal specialService = new SpecialService();
+		
+		Special specialEntity = specialService.findSpecial(specialId);
+		try {
+			specialService.destroy(specialEntity.getId());
+		} catch (IllegalOrphanException e) {
+			e.printStackTrace();
+		} catch (SpecialException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

@@ -19,14 +19,18 @@ import com.pmf.codejam.util.EjbConstants;
     @NamedQuery(name = "Special.findByDescription", query = "SELECT s FROM Special s WHERE s.description = :description"),
     @NamedQuery(name = "Special.findBySummary", query = "SELECT s FROM Special s WHERE s.summary = :summary"),
     @NamedQuery(name = "Special.findByCreationDate", query = "SELECT s FROM Special s WHERE s.creationDate = :creationDate"),
-    @NamedQuery(name = "Special.findByExpirationDate", query = "SELECT s FROM Special s WHERE s.expirationDate = :expirationDate")})
+    @NamedQuery(name = "Special.findByExpirationDate", query = "SELECT s FROM Special s WHERE s.expirationDate = :expirationDate"),
+    @NamedQuery(name = "Special.count", query = "select count(s) from Special as s")})
+
 public class Special implements Serializable {
+	
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID", nullable = false)
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "DESCRIPTION", nullable = false, length = 500)
     private String description;
@@ -43,22 +47,14 @@ public class Special implements Serializable {
     public Special() {
     }
 
-    public Special(Integer id) {
-        this.id = id;
-    }
 
-    public Special(Integer id, String description, Date creationDate) {
-        this.id = id;
+    public Special(String description, Date creationDate) {
         this.description = description;
         this.creationDate = creationDate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getDescription() {

@@ -12,7 +12,7 @@ import com.pmf.codejam.exception.SpecialExpiredException;
 import com.pmf.codejam.util.EjbConstants;
 
 public class SpecialsPublisher {
-    private Integer id;
+    private Long id;
     private String description;
     private String summary;
     private List<NotificationListener> listeners;
@@ -49,11 +49,11 @@ public class SpecialsPublisher {
     	listeners.remove(listener);
     }
     
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

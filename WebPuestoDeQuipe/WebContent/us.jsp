@@ -1,3 +1,9 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	setCurrentMenu("nosotros");
+	$("#quantity").keydown(onlyNumbers);
+});
+</script>
 <br />
 <br />
 <h1>Us</h1>

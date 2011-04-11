@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/css/ui.jqgrid.css" />
 <script type="text/javascript">
 	$(function() {
+		setCurrentMenu("especiales");
 		$("#expirationDate").datepicker({minDate: 0});
 	});
 </script>

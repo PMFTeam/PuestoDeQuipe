@@ -139,11 +139,11 @@ function enterKeyPress(e)
 }
 
 function setCurrentMenu(id) {
-	//$('#'+id).removeClass('myClass noClass').addClass('yourClass');
 	$('#inicioMenu').removeClass('current');
-	$('#accesoriosMenu').removeClass('current');
-	$('#serviciosMenu').removeClass('current');
-	$('#contactosMenu').removeClass('current');
+	$('#ordenarMenu').removeClass('current');
+	$('#especialesMenu').removeClass('current');
+	$('#nosotrosMenu').removeClass('current');
+	$('#administracionMenu').removeClass('current');
 	$('#'+id+'Menu').addClass('current');
 }
 

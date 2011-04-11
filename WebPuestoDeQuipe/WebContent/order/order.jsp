@@ -1,36 +1,73 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<script type="text/javascript">
+$(document).ready(function() {
+	setCurrentMenu("ordenar");
+	$("#quantity").keydown(onlyNumbers);
+});
+</script>
 <script type="text/javascript" src="/WebPuestoDeQuipe/js/order.js"></script>
+<br />
+<br />
+<br />
+<h1>Ordenar : </h1>
 
 
+<s:form action="procesarOrden" validate="false" method="POST" theme="css_xhtml">
 
-<s:form action="procesarOrden" validate="false">
-
-	<s:textfield name="name" label="Nombre" />
-	<s:textfield name="email" label="E-mail" />
-	<s:textfield name="phone" label="Telefono" />
-	<s:textfield name="address" label="Direccion" />
-	
+<table class="normalTable" width="450px" id="specialForm">
+<tr>
+	<td><s:textfield name="name" label="Nombre" /></td>
+	<td></td>
+</tr>
+<tr>
+	<td><s:textfield name="email" label="E-Mail" /></td>
+	<td></td>
+</tr>
+<tr>
+	<td><s:textfield name="phone" label="Telefono" /></td>
+	<td></td>
+</tr>
+<tr>
+	<td><s:textfield name="address" label="Direccion" /></td>
+	<td></td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+	<td></td>
+</tr>
+<tr>
+	<td>	
 				<s:select name="product"
 		list="products"
 		id="product"
 		listKey="productId"
 		listValue="productName"
 		headerKey="0" headerValue="" />	
+		</td>
+		<td rowspan="4"><s:textarea name="bill" id="bill" readonly="true" label="Factura" rows="8" cssStyle="width:150px;" /></td>
 		
-		<s:textfield name="quantity"
+</tr>
+<tr>
+	<td><s:textfield name="quantity"
 			id="quantity"
 			label="Cantidad"
 			maxlength="3"
-			size="3" />
-		
+			size="3" /></td>
+		<td></td>
+</tr>
+<tr>
 	
-	<input type="button" value="Agregar a Factura" onclick="addToBill()" align="left"/>
-			
-	<s:textarea name="bill" id="bill" label="Factura" />
-	
+</tr>
+<tr>
+	<td><input type="button" value="Agregar a Factura" onclick="addToBill()" align="left"/></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan="2" align="center"> <s:submit value="%{'Enviar'}" align="left"/></td>
+</tr>
+</table>
 	<input type="hidden" name="productsSelected"
 			id="productsSelected"
-			type="hidden" />
+			type="hidden" />	
 	
-	<s:submit value="%{'Enviar'}" align="left"/>
 </s:form>

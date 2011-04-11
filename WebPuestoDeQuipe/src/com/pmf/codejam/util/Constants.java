@@ -11,4 +11,5 @@ public interface Constants {
 	public final String SOCIAL_FACEBOOK = "Facebook";
 	public final String SOCIAL_TWITTER = "Twitter";
 	public final int 	SOCIAL_TWITTER_LENGTH = 140;
+	public final int SOCIAL_SUMMARY_LENGTH = 1000;
 }

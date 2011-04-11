@@ -13,10 +13,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.pmf.codejam.ejb.OrderEntityService;
 import com.pmf.codejam.entity.OrderDetail;
 import com.pmf.codejam.entity.OrderEntity;
 import com.pmf.codejam.entity.Product;
+import com.pmf.codejam.util.DataLayerUtil;
 import com.pmf.codejam.util.ProductView;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 public class OrderAction extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 	private static final long serialVersionUID = 1L;
@@ -29,13 +32,10 @@ public class OrderAction extends ActionSupport implements ServletRequestAware, S
 	private List<ProductView> finalProducts;
 
 	private String product;
+	private String bill;
 	
 	public OrderAction() {
-		products = new ArrayList<ProductView>();
-		products.add(new ProductView(1,"Quipe de Pollo",new Double(10.5)));
-		products.add(new ProductView(2,"Quipe de Queso",new Double(5.5)));
-		products.add(new ProductView(3,"Empanada de Pollo",new Double(12.5)));
-		products.add(new ProductView(4,"Empanada de Queso",new Double(15.5)));
+		products = DataLayerUtil.getProducts();
 		finalProducts = new ArrayList<ProductView>();		
 	}
 	public String execute() throws Exception {
@@ -47,11 +47,40 @@ public class OrderAction extends ActionSupport implements ServletRequestAware, S
 	
 	public String processOrder() throws Exception {
 		log.info("Order::processOrder()");
+		
+		try {
 		product = httpServletRequest.getParameter("productsSelected");
 		String name = httpServletRequest.getParameter("name");
 		String email = httpServletRequest.getParameter("email");
 		String phone = httpServletRequest.getParameter("phone");
 		String address = httpServletRequest.getParameter("address");
+		String bill = httpServletRequest.getParameter("bill");
+
+		
+		if(org.apache.commons.lang.xwork.StringUtils.isEmpty(name)) {
+			addActionError("Nombre esta vacio o es invalido");
+			
+		}
+		
+		if ( org.apache.commons.lang.xwork.StringUtils.isEmpty(phone)) {
+			addActionError("Telefono esta vacio o es invalido");
+			
+		}
+		
+		if ( org.apache.commons.lang.xwork.StringUtils.isEmpty(address)) {
+			addActionError("Direccion esta vacia o es invalida");
+		}
+		
+		if ( org.apache.commons.lang.xwork.StringUtils.isEmpty(product)) {
+			addActionError("Factura vacia o invalida.");
+		}
+		
+		if(hasActionErrors()) {
+			return ERROR;
+		}
+		
+		//getActionErrors();
+				
 
 		StringBuffer input = new StringBuffer(product.trim());
 		input.deleteCharAt(0);
@@ -69,6 +98,15 @@ public class OrderAction extends ActionSupport implements ServletRequestAware, S
 		orderEntity.setPhone(phone);
 		orderEntity.setAddress(address);
 		orderEntity.setOrderDetails(orderDetails);
+		
+		OrderEntityService orderEntityService = new OrderEntityService();
+		orderEntityService.create(orderEntity);
+		
+		} catch (Exception ex) {
+			addActionError("Error al procesar la Orden.");
+			log.info("Order::processOrder()::" + ex);
+			return ERROR;
+		}
 		
 				
 		return SUCCESS;
@@ -104,6 +142,12 @@ public class OrderAction extends ActionSupport implements ServletRequestAware, S
 		this.product = product;
 	}
 	
+	public String getBill() {
+		return bill;
+	}
+	public void setBill(String bill) {
+		this.bill = bill;
+	}
 	private List<ProductView> getFinalListOfProducts (String input) {
 		log.info("Order::getFinalListOfProducts() input = " + input );
 		

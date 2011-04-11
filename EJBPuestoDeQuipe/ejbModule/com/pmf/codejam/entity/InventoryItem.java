@@ -16,7 +16,6 @@ import javax.persistence.*;
     @NamedQuery(name = "InventoryItem.findById", query = "SELECT i FROM InventoryItem i WHERE i.id = :id"),
     @NamedQuery(name = "InventoryItem.findByDescription", query = "SELECT i FROM InventoryItem i WHERE i.description = :description"),
     @NamedQuery(name = "InventoryItem.findByQuantity", query = "SELECT i FROM InventoryItem i WHERE i.description = :quantity"),
-    @NamedQuery(name = "InventoryItem.findByUnit", query = "SELECT i FROM InventoryItem i WHERE i.unit = :unit"),
     @NamedQuery(name = "InventoryItem.findByRestockingLevel", query = "SELECT i FROM InventoryItem i WHERE i.restockingLevel = :restockingLevel"),
     @NamedQuery(name = "InventoryItem.findByRestockingQuantity", query = "SELECT i FROM InventoryItem i WHERE i.restockingQuantity = :restockingQuantity")})
 public class InventoryItem implements Serializable{

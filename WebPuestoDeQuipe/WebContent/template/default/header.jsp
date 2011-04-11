@@ -8,7 +8,7 @@
 		&nbsp;
 	</td>
 	<td width="50%" valign="top" height="5px" align="center">
-		<img src="<%=request.getContextPath()%>/images/Logo.png" border="0" />
+		<img src="<%=request.getContextPath()%>/images/Logo.png" border="0" width="70" height="70" />
 	</td>
 	<td width="25%" valign="top" height="5px">
 		<div id="headerLinks">

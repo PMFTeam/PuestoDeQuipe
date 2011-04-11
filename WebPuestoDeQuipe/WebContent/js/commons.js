@@ -8,22 +8,6 @@ function opennormalpopup(url, name, width, height)
 }
 
 
-function openLoginForm() {
-	$( "#dialog-confirm" ).dialog({
-		resizable: false,
-		height:243,
-		width:486,
-		modal: true,
-		buttons: {
-
-			Cancelar: function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	});
-
-}
-
 function backgroundFilter() {
 	var div;
 	if (document.getElementById) {
@@ -40,30 +24,6 @@ function backgroundFilter() {
 	// If the background is hidden ('none') then it will display it ('block').
 	// If the background is displayed ('block') then it will hide it ('none').
 	div.style.display = (div.style.display == '' || div.style.display == 'block') ? 'none' : 'block';
-}
-
-function editView(id)
-{
-	var div;
-	if (document.getElementById) {
-		// Standard way to get element
-		div = document.getElementById(id);
-	} else if (document.all) {
-		// Get the element in old IE's
-		div = document.all[id];
-	}
-	// if the style.display value is blank we try to check it out here
-	if (div.style.display == '' && div.offsetWidth != undefined && div.offsetHeight != undefined) {
-		div.style.display = (div.offsetWidth != 0 && elem.offsetHeight != 0) ? 'block' : 'none';
-	}
-	// If the PopUp is hidden ('none') then it will display it ('block').
-	// If the PopUp is displayed ('block') then it will hide it ('none').
-	div.style.display = (div.style.display == '' || div.style.display == 'block') ? 'none' : 'block';
-	// Off-sets the X position by 15px
-	/*X = X + 15;
-	div.style.left = X + 'px';
-	div.style.top = Y + 'px';
-	*/
 }
 
 function hideById(id) {
@@ -147,36 +107,6 @@ function setCurrentMenu(id) {
 	$('#'+id+'Menu').addClass('current');
 }
 
-function ask(id, question, callback) {
-	$('#'+id+'Msg').html(question);
-	$("#"+id).dialog({
-		resizable: false,
-		height:140,
-		resizable: false,
-		height:200,
-		modal: true,
-		position: 'center',
-		closeOnEscape: true,
-		modal: true,
-		buttons: {
-			'Si': function() {
-				$(this).dialog('close');
-				callback(true);
-			},
-			'No borrar': function() {
-				$(this).dialog('close');
-				callback(false);
-			}
-		}
-	});
-}
-
-function deleteTr(object) {
-	   //$(object).closest("tr").slideUp();fadeOut('slow'
-	$(object).closest("tr").fadeOut('slow');
-	   //$(object).closest("table").find("tr:eq(" + colnum + ")").remove();
-}
-
 function onlyNumbers(event) {
 	if ( event.keyCode == 46 || event.keyCode == 8 ) {
 		// let it happen, don't do anything
@@ -199,6 +129,22 @@ function addToBill() {
 	var productValue = element.options[element.selectedIndex].value;
 	var productText = element.options[element.selectedIndex].text;
 	var productQuantity = document.getElementById("quantity").value;
+	
+	if(null == productText 
+			|| new String(productText).length == 0) {
+			alert("Favor Seleccionar un producto.");
+	        document.getElementById('product').focus();
+	        return;
+		}
+	
+	if(productQuantity ==""){
+		alert("Favor indicar la cantidad.");
+        document.getElementById('quantity').focus();
+        return;
+
+	}
+	
+	
 	var texteArea = document.getElementById("bill");
 	var productsSelected = document.getElementById("productsSelected");
 	

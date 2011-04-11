@@ -12,7 +12,7 @@ import java.util.*;
 * @author fpimentel
 */
 @Entity
-@Table(name = EjbConstants.TABLE_PRODUCTS)
+@Table(name = EjbConstants.TABLE_PRODUCTS, catalog="", schema="app")
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),

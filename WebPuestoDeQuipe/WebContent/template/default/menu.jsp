@@ -13,6 +13,7 @@
 		 <ul id="submenu">
 			  <li><a href="<%=request.getContextPath()%>/admin/Productos.do">Productos</a></li>
 			  <li><a href="<%=request.getContextPath()%>/admin/Especiales.do">Especiales</a></li>
+			  <li><a href="<%=request.getContextPath()%>/admin/Especiales.do">Cocina</a></li>
   		</ul>
 	</li>		
 	</s:if>

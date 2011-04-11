@@ -9,9 +9,8 @@ import java.io.Serializable;
 * @author fpimentel
 */
 @Entity
-@Table(name = EjbConstants.TABLE_INGREDIENTS)
+@Table(name = EjbConstants.TABLE_INGREDIENTS, catalog="", schema="app")
 @NamedQueries({
-   @NamedQuery(name = "Ingredient.findAll", query = "SELECT i FROM Ingredient i"),
    @NamedQuery(name = "Ingredient.findByProductId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.productId = :productId"),
    @NamedQuery(name = "Ingredient.findByInventoryId", query = "SELECT i FROM Ingredient i WHERE i.ingredientPK.inventoryId = :inventoryId"),
    @NamedQuery(name = "Ingredient.findByQuantityNeeded", query = "SELECT i FROM Ingredient i WHERE i.quantityNeeded = :quantityNeeded")})

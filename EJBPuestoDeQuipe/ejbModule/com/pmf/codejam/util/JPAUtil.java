@@ -9,7 +9,7 @@ public class JPAUtil {
 
 	public EntityManagerFactory getEMF (){
         if (emf == null){
-            emf = Persistence.createEntityManagerFactory("myAutoService");
+            emf = Persistence.createEntityManagerFactory("PuestoDeQuipeService");
         }
         return emf;
     }

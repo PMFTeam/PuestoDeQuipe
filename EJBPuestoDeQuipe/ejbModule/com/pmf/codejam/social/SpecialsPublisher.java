@@ -19,8 +19,7 @@ public class SpecialsPublisher {
     
     public SpecialsPublisher(Special special) throws SpecialExpiredException {
     	super();
-    	if (!special.isCurrent()) 
-    		throw new SpecialExpiredException("Special is expired...");
+
     	load(special);
     	listeners = new ArrayList<NotificationListener>();
     }

@@ -121,24 +121,9 @@ h1 {
 	margin-bottom: 3px;
 }
 
-/*
-	 CSS-Tricks Example
-	 by Chris Coyier
-	 http://css-tricks.com
-*/
 input, select                           { margin: 3; padding: 1; border: 1px solid #CCCCCC; }
 .home *                                 { margin: 0; padding: 0; }
 a, a img                                { border: 0; text-decoration: none; outline: 0; }
-
-#textSlide                              { padding: 10px 30px; }
-#textSlide h3                           { font: 20px Georgia, Serif; }
-#textSlide h4                           { text-transform: uppercase; font: 15px Georgia, Serif; margin: 10px 0; }
-#textSlide ul                           { list-style: disc; margin: 0 0 0 25px; }
-#textSlide ul li                        { display: list-item; }
-
-#quoteSlide                             { padding: 30px; }
-#quoteSlide blockquote                  { font: italic 13px Georgia, Serif; text-align: center; color: #444; margin: 0 0 10px 0; }
-#quoteSlide p                           { text-align: center; }
 
 #tableHeader{
 	border: 0px;
@@ -225,10 +210,6 @@ a, a img                                { border: 0; text-decoration: none; outl
 #leftFloat { float: left; }
 #rightFloat {float: right;}
 #clearSides { clear: both; }
-
-#vehiculosModify input, #vehiculosModify select{
-	width: 135px;
-}
 
 #wwctrl_car0, #wwctrl_car1,#wwctrl_car2,#wwctrl_car3,#wwctrl_car4 {
 	display:none;
@@ -363,21 +344,9 @@ text-decoration: underline;
 	border-left-style: dotted;
 	border-left-width: 1px;
 }
-/*
-.classWithMargin{ margin: 3; padding: 3; }
-input{ 
-	margin: 10;
-	padding: 10; 
-}*/
 
-#selectCar {
-	width: 150px;
-}
 .selectMultiple {
 	width: 200px;
-}
-.selectMultipleQty {
-	width: 50px;
 }
 .centered {
 	text-align: center;
@@ -399,59 +368,4 @@ input{
     z-index: 1000;
     width: 100%;
     height: 100%;
-}
-
-
-.clearfix {
-	display: inline-block;
-}
-.clearfix {
-	display: block;
-}
-#continueShopping {
-	float: right;
-	padding-top: 13px;
-	padding-right: 10px;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	font-size: 11px;
-	color: #4d5d8a;
-}
-
-
-#totalsTable {
-	border: 0px;
-	background-color: #F0EBEA;
-	width: 250px;
-	color: #666666;	
-	padding: 0px;
-	margin: 0px;
-}
-#totalsTable td {
-	padding: 5px;
-}
-
-#totalsTable th {
-	background-color: #B1ABA5;
-	color: #FFFFFF;
-	font-weight: bold;
-	font-size: 10px;
-	padding: 5px;
-}
-
-
-.tooltips span {
-    display:none;
-    position:absolute;
-    z-index:1000;
-    -moz-border-radius:4px;
-    -webkit-border-radius:4px;
-}
-
-.tooltip-style1 {
-	background:#D56F6F url(/PMFWeb/images/support.png) 10px center no-repeat;
-	color:white;
-	min-height:30px;
-	padding:10px 20px 10px 65px;
-	opacity:0.9;
 }

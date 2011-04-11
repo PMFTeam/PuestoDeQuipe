@@ -39,13 +39,15 @@ public class SpecialAction extends ActionSupport implements ServletRequestAware,
 				calendar = Calendar.getInstance();
 				calendar.setTime(Constants.COMMON_DATE_FORMAT.parse(expirationDate));
 			}
-			if (summary == null || summary.length() > 500 || description == null || description.length() > 140) 
+			if (summary == null || summary.length() > Constants.SOCIAL_SUMMARY_LENGTH || description == null || description.length() > Constants.SOCIAL_TWITTER_LENGTH) 
 				throw new Exception();
 			
 			SpecialView special = new SpecialView(getDescription(), getSummary(), calendar, Arrays.asList(social.split(",")));
 			DataLayerUtil.addSpecial(special);
 			
 		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
 			addActionError("Error en los datos");
 			return ERROR;
 		}

@@ -5,13 +5,25 @@ $(document).ready(function() {
 	$("#quantity").keydown(onlyNumbers);
 });
 </script>
+<style>
+.error {
+color: #D8000C;
+}
+</style>
+
 <script type="text/javascript" src="/WebPuestoDeQuipe/js/order.js"></script>
 <br />
 <br />
 <br />
+
+
 <h1>Ordenar : </h1>
 
-
+<s:if test="hasActionErrors()">
+   <div class="error">
+      <s:actionerror />
+   </div>
+</s:if>
 <s:form action="procesarOrden" validate="false" method="POST" theme="css_xhtml">
 
 <table class="normalTable" width="450px" id="specialForm">
@@ -63,7 +75,7 @@ $(document).ready(function() {
 	<td></td>
 </tr>
 <tr>
-	<td colspan="2" align="center"> <s:submit value="%{'Enviar'}" align="left"/></td>
+	<td colspan="2" align="center"> <s:submit value="%{'Enviar'}" onclick="send()" align="left"/></td>
 </tr>
 </table>
 	<input type="hidden" name="productsSelected"

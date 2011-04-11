@@ -28,7 +28,7 @@ import com.pmf.codejam.util.EjbConstants;
  * @author Frederick
  */
 @Entity
-@Table(name = EjbConstants.TABLE_ORDERS)
+@Table(name = EjbConstants.TABLE_ORDERS, catalog="", schema="app")
 @NamedQueries({
     @NamedQuery(name = "OrderEntity.findAll", query = "SELECT o FROM OrderEntity o"),
     @NamedQuery(name = "OrderEntity.findByOrderNo", query = "SELECT o FROM OrderEntity o WHERE o.orderNo = :orderNo"),

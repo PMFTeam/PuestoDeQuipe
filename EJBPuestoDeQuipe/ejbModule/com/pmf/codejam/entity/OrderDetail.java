@@ -23,12 +23,10 @@ import com.pmf.codejam.entity.OrderDetailPK;
  * @author Frederick
  */
 @Entity
-@Table(name = "ORDER_DETAILS")
+@Table(name = "ORDER_DETAILS", catalog="", schema="app")
 @NamedQueries({
-    @NamedQuery(name = "OrderItem.findAll", query = "SELECT o FROM OrderItem o"),
-    @NamedQuery(name = "OrderItem.findByOrderNo", query = "SELECT o FROM OrderItem o WHERE o.orderItemPK.orderNo = :orderNo"),
-    @NamedQuery(name = "OrderItem.findByDetailSeq", query = "SELECT o FROM OrderItem o WHERE o.orderItemPK.detailSeq = :detailSeq"),
-    @NamedQuery(name = "OrderItem.findByQuantity", query = "SELECT o FROM OrderItem o WHERE o.quantity = :quantity")})
+    @NamedQuery(name = "OrderDetail.findAll", query = "SELECT o FROM OrderDetail o"),
+    @NamedQuery(name = "OrderDetail.findByQuantity", query = "SELECT o FROM OrderDetail o WHERE o.quantity = :quantity")})
 public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -39,7 +37,7 @@ public class OrderDetail implements Serializable {
     @JoinColumn(name = "ORDER_NO", referencedColumnName = "ORDER_NO", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private OrderEntity orderEntity;
-    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false)
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID", nullable = false, insertable=false, updatable=false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Product product;
 

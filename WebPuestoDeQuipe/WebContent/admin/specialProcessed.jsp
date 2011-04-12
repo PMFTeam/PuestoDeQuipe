@@ -24,6 +24,7 @@
         ref.document.write($(diva).html());
         //ref.document.write('</body></html>');
         ref.document.close();
+        ref.print(); 
 //        return ref;
 	}
 </script>

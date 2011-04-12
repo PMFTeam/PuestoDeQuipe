@@ -1,5 +1,6 @@
 package com.pmf.codejam.social.twitter;
 
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -38,7 +39,8 @@ public class TwitterPublisher {
 		try {
 			if (this.message == null || this.message.length() == 0) 
 				throw new NullPointerException("Twitter Message is empty...");
-			twitter.updateStatus(this.message);
+			Status status = twitter.updateStatus(this.message);
+			System.out.println("Twitter status: " + status);
 		} catch (TwitterException e) {
 			throw e;
 		}

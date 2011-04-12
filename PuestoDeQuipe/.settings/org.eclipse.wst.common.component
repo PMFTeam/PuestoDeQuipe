@@ -10,5 +10,24 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="restfb-1.6.4.jar" deploy-path="/lib" handle="module:/classpath/lib/PuestoDeQuipe/lib/restfb-1.6.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="twitter4j-core-2.2.1.jar" deploy-path="/" handle="module:/classpath/lib/PuestoDeQuipe/lib/twitter4j-core-2.2.1.jar">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="twitter4j-async-2.2.1.jar" deploy-path="/" handle="module:/classpath/lib/PuestoDeQuipe/lib/twitter4j-async-2.2.1.jar">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="twitter4j-media-support-2.2.1.jar" deploy-path="/" handle="module:/classpath/lib/PuestoDeQuipe/lib/twitter4j-media-support-2.2.1.jar">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="twitter4j-stream-2.2.1.jar" deploy-path="/" handle="module:/classpath/lib/PuestoDeQuipe/lib/twitter4j-stream-2.2.1.jar">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

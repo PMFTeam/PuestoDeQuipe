@@ -36,6 +36,7 @@ public class FacebookPublisher {
 	
 	public void updateStatusViaMail() throws MessagingException {
 		Mailer mailer =  new Mailer(SMTPSettings.getUser(), facebookEmailUpdater, message, "");
+		mailer.setSmtpSetting(SMTPSettings);
 		mailer.send();
 	}
 	public String publishMessage() {

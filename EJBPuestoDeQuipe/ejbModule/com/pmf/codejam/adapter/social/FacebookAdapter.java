@@ -1,5 +1,6 @@
 package com.pmf.codejam.adapter.social;
 
+import javax.mail.MessagingException;
 import javax.management.Notification;
 
 import com.pmf.codejam.exception.SocialConnectionException;
@@ -17,7 +18,11 @@ public class FacebookAdapter extends SocialAdapter {
 	public void post() throws SocialConnectionException {
 		fbPublisher.setMessage(getMessage());
 		fbPublisher.setMailAddress(getEmailAddress());
-		fbPublisher.publishMessage();		
+		try {
+			fbPublisher.updateStatusViaMail();
+		} catch (MessagingException e) {
+			throw new SocialConnectionException("Error enviando a facebook...");
+		}		
 	}
 
 	@Override

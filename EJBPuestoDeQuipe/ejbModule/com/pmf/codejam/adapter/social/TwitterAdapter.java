@@ -2,8 +2,6 @@ package com.pmf.codejam.adapter.social;
 
 import javax.management.Notification;
 
-import twitter4j.TwitterException;
-
 import com.pmf.codejam.exception.SocialConnectionException;
 import com.pmf.codejam.social.NotificationUserData;
 import com.pmf.codejam.social.twitter.TwitterPublisher;
@@ -19,7 +17,7 @@ public class TwitterAdapter extends SocialAdapter {
 			publisher.publish();
 		} catch (NullPointerException e) {
 			throw new SocialConnectionException(e.getMessage());
-		} catch (TwitterException e) {
+		} catch (Exception e) {
 			throw new SocialConnectionException(e.getMessage());
 		}
 	}

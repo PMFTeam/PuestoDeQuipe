@@ -81,7 +81,7 @@ public class Mailer {
 
 
 	    Authenticator auth = new SMTPAuthenticator();
-	    Session session = Session.getDefaultInstance(props, auth);
+	    Session session = Session.getInstance(props, auth);
 		
 		Message simpleMessage = new MimeMessage(session);
 		

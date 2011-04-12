@@ -48,7 +48,12 @@
 		<put-attribute name="title" value="Especiales / Combos" />
 		<put-attribute name="body" value="/admin/special.jsp" />
 	</definition>
-	
+
+	<definition name="/specialsProcessed.admin.tiles" extends="baseLayout">
+		<put-attribute name="title" value="Especiales / Combos" />
+		<put-attribute name="body" value="/admin/specialProcessed.jsp" />
+	</definition>
+		
 	<definition name="/login.admin.tiles" extends="baseLayout">
 		<put-attribute name="title" value="Iniciar sesion" />
 		<put-attribute name="body" value="/admin/login.jsp" />

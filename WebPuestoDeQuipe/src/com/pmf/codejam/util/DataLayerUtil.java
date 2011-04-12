@@ -92,6 +92,7 @@ public class DataLayerUtil {
 			specialEntity.setExpirationDate(specialView.getExpirationDate().getTime());
 		
 		SpecialServiceLocal specialService = new SpecialService();
+		specialEntity.setCreationDate(Calendar.getInstance().getTime());
 		specialService.create(specialEntity);
 		
 		try {

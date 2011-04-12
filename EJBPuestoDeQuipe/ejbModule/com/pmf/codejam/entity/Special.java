@@ -44,8 +44,8 @@ public class Special implements Serializable {
     private String description;
     @Column(name = "SUMMARY")
     private String summary;
-    @Basic(optional = false)
-    @Column(name = "CREATION_DATE")
+    @Basic(optional = true)
+    @Column(name = "CREATION_DATE", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date creationDate;
     @Column(name = "EXPIRATION_DATE")
